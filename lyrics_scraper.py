@@ -145,24 +145,6 @@ def fetch_lyrics(df):
     df = df.drop(df[(df['lyrics'] == '') | (df['lyrics'].apply(lambda x : len(x.split())) < 30)].index, axis=0)
     return df
 
-def fetch_popular_artists():
-    '''Scrape the top 100 artists of the year per yer from Billboard, starting from 2006'''
-    base_url = 'https://www.billboard.com/charts/year-end/'
-    popular_artists = []
-    for year in list(range(2006, 2019)):
-        search_url = base_url + str(year) + '/top-artists'
-        response = requests.get(search_url)
-        html = BeautifulSoup(response.content, 'html.parser')
-        artists = html.find_all('div', {'class': 'ye-chart-item__title'})
-        for artist in artists:
-            cleaned_artist = artist.text.strip().replace('\n', '')
-            popular_artists.append({'year': year, 'name': cleaned_artist})
-        print(f'Completed fetching artists for {year}')
-    df = pd.DataFrame(popular_artists)
-    df.drop(df[df.name.duplicated()].index, axis=0, inplace=True)
-    df.to_csv('top_100_artists.csv', index=False)
-    return df
-
 def scrape_artist(artist):
     ''' Scrape the lyrics of of all songs which exist on Genius.com of an artist'''
     print(f'Scraping {artist} lyrics from Genius.com...')
