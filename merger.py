@@ -17,12 +17,12 @@ def fetch_popular_artists():
         print(f'Completed fetching artists for {year}')
     df = pd.DataFrame(popular_artists)
     df.drop(df[df.name.duplicated()].index, axis=0, inplace=True)
-    df.to_csv('top_100_artists.csv', index=False)
+    df.to_csv('data/top_100_artists.csv', index=False)
     return df
 
 def merge_all_artists():
 	''' Gather data collected for all scraped artists into one big csv'''
-	artists = pd.read_csv('list_of_artists.csv')
+	artists = pd.read_csv('data/list_of_artists.csv')
 	grand_df = pd.DataFrame({'api_path': [], 'primary_artist': [], 'title': [], 'url': [],
                          	 'song_endpoint': [], 'album': [], 'release_date': [], 'lyrics': []})
 	count = 0

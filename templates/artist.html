@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dunya's Capstone</title>
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css" rel="stylesheet">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.0.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/styles/main.css">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="static/images/musical-notes-symbols.png" width="50" height="50" class="d-inline-block align-top" alt="">&nbsp;&nbsp;
+        <span class="nav-header" style="font-family:Diskoteque">Lyrics Decomposed</span>
+      </a>
+      </button>
+    </nav>
+    <img src="static/images/light.png" class="spotlight" width="500" height="180" alt=""></div>
+  </head>
+  <body>
+    <div class = "heading" style="font-family:College;">
+    ARIANA GRANDE
+    </div>
+
+    {{ the_div|safe }}
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+    {{ the_script|safe }}
+
+    <div class = "word-cloud">
+    <p><font size="5">Most frequent words by Ariana...</p></font>
+    <img src="static/images/ariana.png" alt="dt" width="650"/>
+    </div>
+
+  </body>
+</html>
