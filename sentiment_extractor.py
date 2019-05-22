@@ -19,6 +19,7 @@ def prepare_lexicon():
         values = [col for col in rs_lex_filtered.columns if int(rs_lex_filtered[col].values) == 1]
         if values != []:
             emotions[word] = values
+    print('Prepared sentiments')
     return emotions
 
 def prepare_corpus(df):
@@ -33,7 +34,7 @@ def prepare_corpus(df):
             lemmatized_word = lemmatizer.lemmatize(word)
             lemmatized_token.append(lemmatized_word)
         corpus.append(lemmatized_token)
-    print('Prepared corpus')
+    print('Prepared the corpus')
     return corpus
 
 def song_sentiments(corpus, emotions):
@@ -65,17 +66,19 @@ def song_polarity(df):
     '''Calculate the combound polarity score of the lyric using the VADER lexicon'''
     analyser = SentimentIntensityAnalyzer()
     polarity = []
+    count = 0
     for lyric in df['lyrics']:
         score = analyser.polarity_scores(str(lyric))
         polarity.append(score['compound'])
+        count += 1
+        print(f'Extracted polarity scores for {count} songs')
     df['polarity'] = polarity
     return df
-
-artist='melaniemartinez'
 
 def extract_sentiments(artist):
     ''' Execute all the above functions '''
     print(f'Analysing the sentiments of {artist}\'s songs')
+    artist = artist.replace(' ', '')
     emotions = prepare_lexicon()
     df = pd.read_csv(f'data/{artist}.csv')
     df = df.drop(df[df.release_date == 'None'].index, axis=0)
