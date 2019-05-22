@@ -2,27 +2,46 @@
 	font-size: 200%;
 }
 
-body {
-	/* background-color: #FFFFFF; */
+/* artist page */
+
+.artist {
 	text-align: center;
+}
+
+.container {
+	display: inline-block;
 }
 
 .heading {
-	text-align: center;
-	transition:1000ms ease all;
-	font-size:100px;
+	font-size:85px;
+}
+
+.heading:hover{
+  color:#5cbdea;
+  /* color:#fff; */
+	-webkit-text-stroke-width: 1px;
+ 	-webkit-text-stroke-color: black;
+}
+
+.polarity {
+	font-size:90px;
+}
+
+p {
+	padding-left: 2%;
 }
 
 .word-cloud {
-	text-align: center;
-	padding-top: 5vw;
-	/* padding-left: 8%;
-	padding-right: 8%; */
+	padding-left: 2%;
 }
 
-.spotlight {
-	transition:1000ms ease all;
+.sentiment-chart {
+	text-align: center;
+	padding-left: 12%;
+	padding-right: 12%;
 }
+
+/* main page */
 
 .intro {
 	text-align: center;
@@ -50,6 +69,7 @@ button:hover{
   background:#5cbdea;
   color:#fff;
 }
+
 button:before,button:after{
   content:'';
   position:absolute;
@@ -60,12 +80,14 @@ button:before,button:after{
   background: #000000;
   transition:400ms ease all;
 }
+
 button:after{
   right:inherit;
   top:inherit;
   left:0;
   bottom:0;
 }
+
 button:hover:before,button:hover:after{
   width:100%;
   transition:800ms ease all;

@@ -1,5 +1,4 @@
 from sklearn.feature_extraction.text import CountVectorizer
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -7,6 +6,7 @@ import numpy as np
 import random
 
 def word_cloud_generator(df, artist):
+    '''Creates a word cloud for the given artist and saves the file as png'''
     cv = CountVectorizer(min_df=0, stop_words="english", max_features=200)
     counts = cv.fit_transform(df['lyrics'])
     words_freq = pd.DataFrame(counts.todense(), columns = cv.get_feature_names())
