@@ -1,1 +1,1 @@
-# capstone
+# lyrIQ
