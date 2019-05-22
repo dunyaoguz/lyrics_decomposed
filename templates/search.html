@@ -10,14 +10,17 @@
       <a class="navbar-brand" href="#">
         <img src="static/images/musical-notes-symbols.png" width="50" height="50" class="d-inline-block align-top" alt="">&nbsp;&nbsp;
         <span class="nav-header" style="font-family:Diskoteque">Lyrics Decomposed</span>
+        <a href="/" class="home"><img src="static/images/home.png" width="50" height="50" class="align-top" alt=""/></a>
       </a>
       </button>
     </nav>
     <br>
   </head>
-  <body>
-    <form action="." method="POST">
-    <input class = "form" type="text" name="text" placeholder="Enter artist">
+  <body class = "search_body">
+    <form action= '/artist' method="get">
+      <input class = "form" type="text" name="name" placeholder="Enter artist">
     </form>
+    <p class='scrape-info'><font size="5">If the artist is not in inventory...</font></p>
+    <div><button onclick="window.location.href = '/scrape'">Scrape their data&nbsp;&nbsp;<img src="static/images/laptop.png" width="70" height="70"/></button></div>
   </body>
 </html>

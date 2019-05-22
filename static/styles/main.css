@@ -53,7 +53,7 @@ p {
 }
 
 button{
-  background:#F5F5F5;
+  background:#f8f9fa;
   color:#000000;
   border:none;
   position:relative;
@@ -98,24 +98,38 @@ button:hover:before,button:hover:after{
 
 form {
 	padding-left: 3%;
-	background: transparent;
-	outline: none;
-	width: 90%;
-	color: #bababa;
+	outline: None;
+	width: 100%;
+	border-color: #fff;
+}
+
+form input {
+	background-color: #fff;
+	/* background-color: #f8f9fa; */
 }
 
 input::placeholder {
   color: #bababa;
 	font-size:90px;
+	/* background-color: #f8f9fa; */
 }
 
 input {
   font-size: 90px;
-  line-height: 90px;
 	font-family: monospace;
   height: 120px;
   display: inline-block;
-	border-color: black;
-	border-width: medium;
+	outline: None;
 	padding-left:2%;
+	border: none;
+	border-color: transparent;
+}
+
+.scrape-info {
+	text-align: center;
+	padding-top: 10%;
+}
+
+.home {
+	padding-left: 65%;
 }

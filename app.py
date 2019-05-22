@@ -6,6 +6,8 @@ from plotter import sentiment_plot, cluster_plot
 from bokeh.embed import components
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+from lyrics_scraper import scrape_artist
+from sentiment_extractor import extract_sentiments
 
 def read_data(df):
     df_normalized = df.groupby('release_date')[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].sum()
@@ -52,26 +54,42 @@ app = flask.Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-  return render_template('home.html')
+    return render_template('home.html')
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-   return render_template('search.html')
+    return render_template('search.html')
+
+@app.route('/scrape', methods=['GET', 'POST'])
+def scrape():
+    try:
+        if flask.request.method == 'POST':
+            inputs = flask.request.form
+            artist = inputs['name']
+            scrape_artist(artist)
+            extract_sentiments(artist)
+        return render_template('scrape.html')
+    except:
+        return render_template('scraper_error.html')
 
 @app.route('/artist', methods=['POST', 'GET'])
 def artist():
-    artist = flask.request.args['artist']
-    stripped_artist = artist.replace(' ', '')
-    df = pd.read_csv(f'sentiment_data/{stripped_artist}.csv', index_col=0)
-    polarity = round(df.polarity.mean(), 2)
-    normalized_df = read_data(df)
-    chart_1 = sentiment_plot(normalized_df)
-    clusters = cluster_data(df)
-    chart_2 = cluster_plot(clusters)
-    script_1, div_1 = components(chart_1)
-    script_2, div_2 = components(chart_2)
-    image = f'static/images/word_clouds/{stripped_artist}.png'
-    return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image)
+    try:
+        artist = flask.request.args['name']
+        stripped_artist = artist.replace(' ', '')
+        df = pd.read_csv(f'sentiment_data/{stripped_artist}.csv', index_col=0)
+        df = df.drop_duplicates()
+        polarity = round(df.polarity.mean(), 2)
+        normalized_df = read_data(df)
+        chart_1 = sentiment_plot(normalized_df)
+        clusters = cluster_data(df)
+        chart_2 = cluster_plot(clusters)
+        script_1, div_1 = components(chart_1)
+        script_2, div_2 = components(chart_2)
+        image = f'static/images/word_clouds/{stripped_artist}.png'
+        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image)
+    except:
+        return render_template('inventory_error.html')
 
 if __name__ == '__main__':
     HOST = '127.0.0.1'

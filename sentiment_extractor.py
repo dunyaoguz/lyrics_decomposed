@@ -33,11 +33,13 @@ def prepare_corpus(df):
             lemmatized_word = lemmatizer.lemmatize(word)
             lemmatized_token.append(lemmatized_word)
         corpus.append(lemmatized_token)
+    print('Prepared corpus')
     return corpus
 
 def song_sentiments(corpus, emotions):
     '''Get the frequency of each sentiment in the artists songs'''
     song_emotions = []
+    count = 0
     for song in corpus:
         emotion_count = {'anger': 0,
                          'positive': 0,
@@ -55,6 +57,8 @@ def song_sentiments(corpus, emotions):
                 for emotion in word_emotions:
                     emotion_count[emotion] += 1
         song_emotions.append(emotion_count)
+        count += 1
+        print(f'Extracted sentiments for {count} songs')
     return song_emotions
 
 def song_polarity(df):
@@ -67,16 +71,18 @@ def song_polarity(df):
     df['polarity'] = polarity
     return df
 
-if __name__ == '__main__':
-    artists = pd.read_csv('data/list_of_artists.csv')
+artist='melaniemartinez'
+
+def extract_sentiments(artist):
+    ''' Execute all the above functions '''
+    print(f'Analysing the sentiments of {artist}\'s songs')
     emotions = prepare_lexicon()
-    for artist in artists.name.tolist():
-        df = pd.read_csv(f'data/{artist}.csv')
-        df = df.drop(df[df.release_date == 'None'].index, axis=0)
-        df = df.reset_index().drop('index', axis=1)
-        corpus = prepare_corpus(df)
-        sentiments = song_sentiments(corpus, emotions)
-        df = song_polarity(df)
-        df = df.join(pd.DataFrame(sentiments), how='left')
-        df.to_csv(f'sentiment_data/{artist}.csv')
-        print(f'Completed analysing {artist}.')
+    df = pd.read_csv(f'data/{artist}.csv')
+    df = df.drop(df[df.release_date == 'None'].index, axis=0)
+    df = df.reset_index().drop('index', axis=1)
+    corpus = prepare_corpus(df)
+    sentiments = song_sentiments(corpus, emotions)
+    df = song_polarity(df)
+    df = df.join(pd.DataFrame(sentiments), how='left')
+    df.to_csv(f'sentiment_data/{artist}.csv')
+    print(f'Completed sentiment analysis for {artist}.')

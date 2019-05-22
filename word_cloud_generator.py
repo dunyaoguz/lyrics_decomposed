@@ -11,14 +11,15 @@ def word_cloud_generator(df, artist):
     counts = cv.fit_transform(df['lyrics'])
     words_freq = pd.DataFrame(counts.todense(), columns = cv.get_feature_names())
     words_dict = {}
+    stopwords = list(STOPWORDS)
+    stopwords.extend(['don', 'like', 'ain', 'oh', 'll', 'ooh', 'na', 'just', 've', 'tha', 'yeah'])
     for word in words_freq.columns:
+      if word not in stopwords:
         words_dict[word] = words_freq[word].sum()
-    stopwords = set(STOPWORDS)
     x, y = np.ogrid[:300, :300]
     mask = (x - 150) ** 2 + (y - 150) ** 2 > 130 ** 2
     mask = 255 * mask.astype(int)
     wc = WordCloud(max_words=200,
-                   stopwords=stopwords,
                    scale=5,
                    height=300,
                    width=600,
@@ -31,8 +32,9 @@ def word_cloud_generator(df, artist):
     wc.to_file(f"static/images/word_clouds/{artist}.png")
     print(f'Created word cloud for {artist}')
 
-artists = pd.read_csv('data/list_of_artists.csv')
-for artist in artists.name.tolist():
-    df = pd.read_csv(f'data/{artist}.csv')
-    df = df.dropna()
-    word_cloud_generator(df, artist)
+if __name__ == '__main__':
+    artists = pd.read_csv('data/list_of_artists.csv')
+    for artist in artists.name.tolist():
+        df = pd.read_csv(f'data/{artist}.csv')
+        df = df.dropna()
+        word_cloud_generator(df, artist)

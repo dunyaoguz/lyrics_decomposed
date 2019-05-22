@@ -153,18 +153,18 @@ def scrape_artist(artist):
     artist = artist.replace(' ', '').lower()
     df.to_csv(f'data/{artist}.csv', index=False)
     print('Lyrics info for this artist has been scraped from genius.com. You can find the csv in the data folder inside this repository.')
+    existing_artists = pd.read_csv('data/list_of_artists.csv')
+    existing_artists = existing_artists.append({'name': artist.replace(' ', '').lower(), 'song_count': df.shape[0]}, ignore_index=True)
+    existing_artists.to_csv('data/list_of_artists.csv', index=False)
     return df
 
 if __name__ == '__main__':
     top_100_artists = pd.read_csv('data/top_100_artists.csv')
-    existing_artists = pd.read_csv('data/list_of_artists.csv')
     year = input('Enter the year for which you want to scrape the top artists: ')
     filtered_top_artists = top_100_artists[top_100_artists.year == int(year)].name.tolist()
     filtered_top_artists = [artist for artist in filtered_top_artists if artist.replace(' ', '').lower() not in existing_artists.name.tolist()]
     if filtered_top_artists != []:
         for artist in filtered_top_artists:
             df = scrape_artist(artist)
-            existing_artists = existing_artists.append({'name': artist.replace(' ', '').lower(), 'song_count': df.shape[0]}, ignore_index=True)
-            existing_artists.to_csv('data/list_of_artists.csv', index=False)
     else:
         print('All the top artists for this year have been scraped.')

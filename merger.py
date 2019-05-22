@@ -24,14 +24,20 @@ def merge_all_artists():
 	''' Gather data collected for all scraped artists into one big csv'''
 	artists = pd.read_csv('data/list_of_artists.csv')
 	grand_df = pd.DataFrame({'api_path': [], 'primary_artist': [], 'title': [], 'url': [],
-                         	 'song_endpoint': [], 'album': [], 'release_date': [], 'lyrics': []})
+                         	 'song_endpoint': [], 'album': [], 'release_date': [], 'lyrics': [],
+                             'polarity': [], 'anger': [], 'anticipation': [], 'disgust': [], 'fear': [],
+                             'joy': [], 'negative': [], 'positive': [], 'sadness':[], 'surprise': [], 'trust': []})
 	count = 0
-	for artist in artists.name.tolist():
-	    artist_csv = pd.read_csv(f'data/{artist}.csv')
-	    count += artist_csv.shape[0]
-	    grand_df = grand_df.append(artist_csv)
-	if count == grand_df.shape[0]:
-		grand_df.to_csv('data/grand_df.csv')
+    rows = 0
+    for artist in artists.name.tolist():
+        artist_csv = pd.read_csv(f'sentiment_data/{artist}.csv')
+        rows += artist_csv.shape[0]
+        grand_df = grand_df.append(artist_csv, ignore_index=True)
+        count += 1
+        print(f'{count} artists merged')
+    grand_df = grand_df.drop_duplicates().reset_index()
+    grand_df = grand_df.drop(['index'], axis=1)
+    grand_df.to_csv('sentiment_data/grand_df.csv')
 
 fetch_popular_artists()
 merge_all_artists()
