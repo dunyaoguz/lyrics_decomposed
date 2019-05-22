@@ -13,15 +13,11 @@
       </a>
       </button>
     </nav>
+    <br>
   </head>
   <body>
-    <div class="intro">
-    <p><img src="static/images/audio.png" width="120" height="120"/></p>
-    <p>Welcome to <b>LYRICS DECOMPOSED</b></p>
-    <p>Whose lyrics would you like to analyse today?</p>
-    </div>
-    <div><button>Popular artists of the 2000s&nbsp;&nbsp;<img src="static/images/band.png" width="70" height="70"/></button></div>
-    <div><button onclick="window.location.href = '/search'">Select specific artist&nbsp;&nbsp;<img src="static/images/singer.png" width="70" height="70"/></button></div>
-    <div><button>Compare two artists&nbsp;&nbsp;<img src="static/images/balance.png" width="70" height="70"/></button></div>
+    <form action="." method="POST">
+    <input class = "form" type="text" name="text" placeholder="Enter artist">
+    </form>
   </body>
 </html>

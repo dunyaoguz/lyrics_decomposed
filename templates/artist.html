@@ -13,34 +13,40 @@
       </a>
       </button>
     </nav>
-  </head>
-
-  <body>
     <br>
+  </head>
+  <body>
       <div class="artist">
         <p><img src="static/images/analytics.png" width="120" height="120" class="d-inline-block align-top" alt=""></p>
         <p><font size="5">Currently analysing...</font></p>
           <div class="heading" style="font-family:Husky Stash">
-          ARIANA GRANDE
+          {{ artist }}
         </div>
       </div>
     <br>
-    <br>
-    <p><font size="5">Composite polarity score...</font></p>
+    <p><font size="5">Composite polarity score;</font></p>
       <div class="polarity"style="font-family:College"><p>{{ polarity }}</p></div>
-    <br>
-    <p><font size="5">Sentiments expressed in songs over the years...</p></font>
-    <div class="sentiment-chart">
-      <br>
-      {{ the_div|safe }}
+    <p><font size="5">Sentiments expressed in songs over the years;</p></font>
+    <div class="chart">
+      {{ the_div_1|safe }}
       <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
       <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
-      {{ the_script|safe }}
+      {{ the_script_1|safe }}
     </div>
     <br>
-    <p><font size="5">Words sung most frequently...</font></p>
+    <p><font size="5">Clusters of songs which are similar in sentiment;</p></font>
+    <div class="chart">
+      <br>
+      {{ the_div_2|safe }}
+      <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+      <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+      {{ the_script_2|safe }}
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <p><font size="5">Topics sung about;</font></p>
+    <p><font size="5">Words sung most frequently;</font></p>
     <div class = "word-cloud">
-      <img src="static/images/word_clouds/arianagrande.png" alt="dt" width="650"/>
+      <img src= {{ image }} alt="dt" width="700"/>
     </div>
     <br>
   </body>

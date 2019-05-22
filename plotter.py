@@ -1,57 +1,80 @@
 from bokeh.plotting import figure, output_file, show
-from bokeh.models import HoverTool, Legend, ColumnDataSource
+from bokeh.models import HoverTool, Legend, ColumnDataSource, Panel, Tabs, ColumnDataSource, LabelSet
 
 def sentiment_plot(df):
     a = int(df['release_year'].min())
     b = int(df['release_year'].max())
-    p = figure(plot_width=900, plot_height=450, x_range=(a, b), y_range=(0, 0.5), x_axis_label='Years',
+    p = figure(plot_width=1000, plot_height=450, x_range=(a, b), y_range=(0, 0.5), x_axis_label='Years',
                y_axis_label='Percent of sentiments expressed', toolbar_location='above')
 
-    p.line(df['release_year'], df['disgust'], legend='disgust', color='red', line_dash="4 4", line_width=3, muted_color='red', muted_alpha=0.2)
-    p.circle(df['release_year'], df['disgust'], legend='disgust', fill_color='red', size=8, color='red', muted_color='red', muted_alpha=0.2)
+    r0 = p.line(df['release_year'], df['disgust'], color='red', line_dash="4 4", line_width=3)
+    r1 = p.circle(df['release_year'], df['disgust'], fill_color='red', size=8, color='red')
 
-    p.line(df['release_year'], df['sadness'], legend='sadness', color='navy', line_dash="4 4", line_width=3, muted_color='navy', muted_alpha=0.2)
-    p.circle(df['release_year'], df['sadness'], legend='sadness', fill_color='navy', size=8, color='navy', muted_color='navy', muted_alpha=0.2)
+    r2 = p.line(df['release_year'], df['sadness'], color='navy', line_dash="4 4", line_width=3)
+    r3 = p.circle(df['release_year'], df['sadness'], fill_color='navy', size=8, color='navy')
 
-    p.line(df['release_year'], df['joy'], legend='joy', color='yellowgreen', line_dash="4 4", line_width=3, muted_color='yellowgreen', muted_alpha=0.2)
-    p.circle(df['release_year'], df['joy'], legend='joy', fill_color='yellowgreen', size=8, color='yellowgreen', muted_color='yellowgreen', muted_alpha=0.2)
+    r4 = p.line(df['release_year'], df['joy'], color='yellowgreen', line_dash="4 4", line_width=3)
+    r5 = p.circle(df['release_year'], df['joy'], fill_color='yellowgreen', size=8, color='yellowgreen')
 
-    p.line(df['release_year'], df['surprise'], legend='surprise', color='blueviolet', line_dash="4 4", line_width=3, muted_color='blueviolet', muted_alpha=0.2)
-    p.circle(df['release_year'], df['surprise'], legend='surprise', fill_color='blueviolet', size=8, color='blueviolet', muted_color='blueviolet', muted_alpha=0.2)
+    r6 = p.line(df['release_year'], df['surprise'], color='blueviolet', line_dash="4 4", line_width=3)
+    r7 = p.circle(df['release_year'], df['surprise'], fill_color='blueviolet', size=8, color='blueviolet')
 
-    p.line(df['release_year'], df['fear'], legend='fear', color='orange', line_dash="4 4", line_width=3, muted_color='orange', muted_alpha=0.2)
-    p.circle(df['release_year'], df['fear'], legend='fear', fill_color='orange', size=8, color='orange', muted_color='orange', muted_alpha=0.2)
+    r8 = p.line(df['release_year'], df['fear'], color='orange', line_dash="4 4", line_width=3)
+    r9 = p.circle(df['release_year'], df['fear'], fill_color='orange', size=8, color='orange')
 
-    p.line(df['release_year'], df['anticipation'], legend='anticipation', color='hotpink', line_dash="4 4", line_width=3, muted_color='hotpink', muted_alpha=0.2)
-    p.circle(df['release_year'], df['anticipation'], legend='anticipation', fill_color='hotpink', size=8, color='hotpink', muted_color='hotpink', muted_alpha=0.2)
+    r10 = p.line(df['release_year'], df['anticipation'], color='hotpink', line_dash="4 4", line_width=3)
+    r11 = p.circle(df['release_year'], df['anticipation'], fill_color='hotpink', size=8, color='hotpink')
 
-    p.line(df['release_year'], df['anger'], legend='anger', line_dash="4 4", color='deepskyblue', line_width=3, muted_color='deepskyblue', muted_alpha=0.2)
-    p.circle(df['release_year'], df['anger'], legend='anger', size=8, color='deepskyblue', fill_color='deepskyblue', muted_color='deepskyblue', muted_alpha=0.2)
+    r12 = p.line(df['release_year'], df['anger'], line_dash="4 4", color='deepskyblue', line_width=3)
+    r13 = p.circle(df['release_year'], df['anger'], size=8, color='deepskyblue', fill_color='deepskyblue')
 
-    anger = p.circle(df['release_year'], df['anger'], size=30, fill_color='white', hover_fill_color='deepskyblue',
-                     fill_alpha=0.02, hover_alpha=0.3, line_color=None, hover_line_color='deepskyblue')
+    p.circle(df['release_year'], df['anger'], size=20, fill_color='white', hover_fill_color='deepskyblue',
+                     fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='deepskyblue')
 
-    surprise = p.circle(df['release_year'], df['surprise'], size=30, fill_color='white', hover_fill_color='blueviolet',
-                        fill_alpha=0.02, hover_alpha=0.3, line_color=None, hover_line_color='blueviolet')
+    p.circle(df['release_year'], df['surprise'], size=20, fill_color='white', hover_fill_color='blueviolet',
+                        fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='blueviolet')
 
-    anticipation = p.circle(df['release_year'], df['anticipation'], size=30, fill_color='white', hover_fill_color='hotpink',
-                            fill_alpha=0.02, hover_alpha=0.3,line_color=None, hover_line_color='hotpink')
+    p.circle(df['release_year'], df['anticipation'], size=20, fill_color='white', hover_fill_color='hotpink',
+                            fill_alpha=0.02, hover_alpha=0.2,line_color=None, hover_line_color='hotpink')
 
-    sadness = p.circle(df['release_year'], df['sadness'], size=30, fill_color='white', hover_fill_color='navy',
-                      fill_alpha=0.02, hover_alpha=0.3,line_color=None, hover_line_color='navy')
+    p.circle(df['release_year'], df['sadness'], size=20, fill_color='white', hover_fill_color='navy',
+                      fill_alpha=0.02, hover_alpha=0.2,line_color=None, hover_line_color='navy')
 
-    disgust = p.circle(df['release_year'], df['disgust'], size=30, fill_color='white', hover_fill_color='red',
-                       fill_alpha=0.02, hover_alpha=0.3, line_color=None, hover_line_color='red')
+    p.circle(df['release_year'], df['disgust'], size=20, fill_color='white', hover_fill_color='red',
+                       fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='red')
 
-    fear = p.circle(df['release_year'], df['fear'], size=30, fill_color='white', hover_fill_color='orange',
-                    fill_alpha=0.02, hover_alpha=0.3, line_color=None, hover_line_color='orange')
+    p.circle(df['release_year'], df['fear'], size=20, fill_color='white', hover_fill_color='orange',
+                    fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='orange')
 
-    joy = p.circle(df['release_year'], df['joy'], size=30, fill_color='white', hover_fill_color='yellowgreen',
-                   fill_alpha=0.02, hover_alpha=0.3, line_color=None, hover_line_color='yellowgreen')
+    p.circle(df['release_year'], df['joy'], size=20, fill_color='white', hover_fill_color='yellowgreen',
+                   fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='yellowgreen')
 
-    p.add_tools(HoverTool(tooltips=[("Year", "$x{0}"), ("Score", "$y{(0.000)}")],
-                          renderers=[anger, sadness, surprise, fear, anticipation, disgust, joy], mode='mouse'))
+    legend = Legend(items=[
+    ("disgust", [r0, r1]),
+    ("sadness", [r2, r3]),
+    ("joy", [r4, r5]),
+    ("surprise", [r6, r7]),
+    ("fear", [r8, r9]),
+    ("anticipation", [r10, r11]),
+    ("anger", [r12, r13])
+    ], location="center")
+
+    TOOLTIPS = """
+    <div>
+        <div>
+            <span style="font-size: 15px;">Year: </span>
+            <span style="font-size: 17px; font-weight: bold;">$x{0}</span>
+        </div>
+        <div>
+            <span style="font-size: 15px;">Score: </span>
+            <span style="font-size: 17px; color: gray;">$y{(0.000)}</span>
+        </div>
+    </div>
+    """
+    p.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
+    p.add_layout(legend, 'right')
     p.legend.click_policy="hide"
+    p.legend.border_line_color = None
     p.background_fill_color = "#f2f2f2"
     p.grid.grid_line_color = "white"
     p.xaxis.major_tick_line_color = 'firebrick'
@@ -60,3 +83,47 @@ def sentiment_plot(df):
     p.axis.major_tick_out = 10
     p.axis.minor_tick_out = 8
     return p
+
+def cluster_plot(df):
+    source = ColumnDataSource(df)
+    TOOLTIPS = """
+    <div>
+        <div>
+            <span style="font-size: 15px;">Album: </span>
+            <span style="font-size: 17px; font-weight: bold;">@album</span>
+        </div>
+        <div>
+            <span style="font-size: 15px;">Song: </span>
+            <span style="font-size: 17px; color: gray;">@title</span>
+        </div>
+    </div>
+    """
+    # 3 neighbors
+    p1 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
+                x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
+    p1.circle('Component1', 'Component2', size=15, source=df, color='color_3', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
+    p1.background_fill_color = "#f2f2f2"
+    p1.grid.grid_line_color = "white"
+    p1.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
+
+    # 4 neighbors
+    p2 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
+                x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
+    p2.circle('Component1', 'Component2', size=15, source=df, color='color_4', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
+    p2.background_fill_color = "#f2f2f2"
+    p2.grid.grid_line_color = "white"
+    p2.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
+
+    # 5 neighbors
+    p3 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
+                x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
+    p3.circle('Component1', 'Component2', size=15, source=df, color='color_5', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
+    p3.background_fill_color = "#f2f2f2"
+    p3.grid.grid_line_color = "white"
+    p3.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
+
+    tab1 = Panel(child=p1, title="3 neighbors")
+    tab2 = Panel(child=p2, title="4 neighbors")
+    tab3 = Panel(child=p3, title="5 neighbors")
+    tabs = Tabs(tabs=[tab1, tab2, tab3])
+    return tabs
