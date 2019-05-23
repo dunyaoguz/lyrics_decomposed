@@ -2,9 +2,10 @@ import pandas as pd
 import flask
 import numpy as np
 from flask import render_template, request
-from plotter import sentiment_plot, cluster_plot
+from plotter import sentiment_plot, cluster_plot, view_albums
 from bokeh.embed import components
 from sklearn.cluster import KMeans
+import random
 from sklearn.decomposition import PCA
 from lyrics_scraper import scrape_artist
 from sentiment_extractor import extract_sentiments
@@ -48,7 +49,25 @@ def cluster_data(df):
     pca['color_5'] = pca['cluster_5'].map(lambda x: colors_5[x])
     pca['title'] = df['title']
     pca['album'] = df['album']
+    pca = pca.replace('None', 'Unknown')
     return pca
+
+def albums_data(df):
+    df['release_date'] = pd.to_datetime(df['release_date'])
+    df['release_year'] = df['release_date'].dt.year
+    df = df.drop(df[df.album == 'None'].index, axis=0)
+    albums = df.groupby('album')[['release_year']].min().reset_index().sort_values(by='release_year')
+    albums_of_songs = {}
+    for album in albums.album.tolist():
+        songs_list = []
+        for i, row in df[['album', 'title']].iterrows():
+            if album == row.album:
+                songs_list.append(row.title)
+        if len(songs_list) > 5:
+            songs_list = random.sample(songs_list, 5)
+        albums_of_songs[album] = songs_list
+    albums['songs'] = list(albums_of_songs.values())
+    return albums
 
 app = flask.Flask(__name__)
 
@@ -59,6 +78,10 @@ def home():
 @app.route('/search', methods=['POST', 'GET'])
 def search():
     return render_template('search.html')
+
+@app.route('/compare_search', methods=['POST', 'GET'])
+def compare_search():
+    return render_template('compare_search.html')
 
 @app.route('/scrape', methods=['GET', 'POST'])
 def scrape():
@@ -84,10 +107,13 @@ def artist():
         chart_1 = sentiment_plot(normalized_df)
         clusters = cluster_data(df)
         chart_2 = cluster_plot(clusters)
+        albums = albums_data(df)
+        chart_3 = view_albums(albums)
         script_1, div_1 = components(chart_1)
         script_2, div_2 = components(chart_2)
+        script_3, div_3 = components(chart_3)
         image = f'static/images/word_clouds/{stripped_artist}.png'
-        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image)
+        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image, the_script_3=script_3, the_div_3=div_3)
     except:
         return render_template('inventory_error.html')
 

@@ -84,6 +84,43 @@ def sentiment_plot(df):
     p.axis.minor_tick_out = 8
     return p
 
+def view_albums(df):
+    a = int(df['release_year'].min())
+    b = int(df['release_year'].max())
+    source = ColumnDataSource(df)
+    p = figure(plot_width=950, plot_height=180, x_range=(a-1, b+1), y_range=(0, 0.5), toolbar_location='above',
+    title='View a random sample of max. 5 songs from each album', tools='pan,box_zoom,reset,save')
+
+    p.scatter(df['release_year'], 0.25, marker='square_cross', fill_color='#D3D3D3', line_color='#696969', line_width=1.5, size=15)
+    h = p.scatter('release_year', 0.25, marker='square', source=df, size=35, fill_color='white', hover_fill_color='#DCDCDC', fill_alpha=0,
+    hover_alpha=0.2, line_color=None, hover_line_color='#DCDCDC')
+    TOOLTIPS = """
+    <div>
+        <div width="10px">
+            <span style="font-size: 15px;">Album: </span>
+            <span style="font-size: 17px; font-weight: bold;">@album</span>
+        </div>
+        <div width="10px">
+            <span style="font-size: 15px;">Songs: </span>
+            <span style="font-size: 17px; color: gray;">@songs</span>
+        </div>
+    </div>
+    """
+    p.add_tools(HoverTool(tooltips=TOOLTIPS, renderers=[h], mode='mouse'))
+    p.xaxis.major_tick_line_color = 'firebrick'
+    p.xaxis.major_tick_line_width = 5
+    p.xaxis.minor_tick_line_color = 'orange'
+    p.axis.major_tick_out = 10
+    p.axis.minor_tick_out = 8
+    p.yaxis.major_tick_line_color = None
+    p.yaxis.minor_tick_line_color = None
+    p.ygrid.grid_line_color = None
+    p.xgrid.grid_line_color = None
+    p.outline_line_color = None
+    # p.xgrid[0].ticker.desired_num_ticks = 10
+    p.yaxis.visible = False
+    return p
+
 def cluster_plot(df):
     source = ColumnDataSource(df)
     TOOLTIPS = """
@@ -122,8 +159,8 @@ def cluster_plot(df):
     p3.grid.grid_line_color = "white"
     p3.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
 
-    tab1 = Panel(child=p1, title="3 neighbors")
-    tab2 = Panel(child=p2, title="4 neighbors")
-    tab3 = Panel(child=p3, title="5 neighbors")
+    tab1 = Panel(child=p1, title="3 clusters")
+    tab2 = Panel(child=p2, title="4 clusters")
+    tab3 = Panel(child=p3, title="5 clusters")
     tabs = Tabs(tabs=[tab1, tab2, tab3])
     return tabs

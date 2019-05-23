@@ -52,7 +52,7 @@ p {
 	padding-bottom: 2%;
 }
 
-button{
+button {
   background:#f8f9fa;
   color:#000000;
   border:none;
@@ -97,7 +97,7 @@ button:hover:before,button:hover:after{
 /* search page */
 
 form {
-	padding-left: 3%;
+	padding-left: 4%;
 	outline: None;
 	width: 100%;
 	border-color: #fff;
@@ -114,13 +114,14 @@ input::placeholder {
 	/* background-color: #f8f9fa; */
 }
 
-input {
+.form {
   font-size: 90px;
 	font-family: monospace;
   height: 120px;
   display: inline-block;
 	outline: None;
 	padding-left:2%;
+	padding-right:2%;
 	border: none;
 	border-color: transparent;
 }
@@ -132,4 +133,22 @@ input {
 
 .home {
 	padding-left: 65%;
+}
+
+.submit_button {
+	font-size: 25px;
+	text-align: center;
+	padding-left: 2%;
+	padding-right: 2%;
+	color: black;
+	outline: None;
+	border-color: black;
+	position: relative;
+	left: 850px;
+}
+
+.submit_button:hover{
+	background-color:#5cbdea;
+	color: white;
+	border-color: #5cbdea;
 }
