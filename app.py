@@ -9,6 +9,7 @@ import random
 from sklearn.decomposition import PCA
 from lyrics_scraper import scrape_artist
 from sentiment_extractor import extract_sentiments
+from IPython.display import HTML
 
 def read_data(df):
     df_normalized = df.groupby('release_date')[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].sum()
@@ -57,16 +58,6 @@ def albums_data(df):
     df['release_year'] = df['release_date'].dt.year
     df = df.drop(df[df.album == 'None'].index, axis=0)
     albums = df.groupby('album')[['release_year']].min().reset_index().sort_values(by='release_year')
-    albums_of_songs = {}
-    for album in albums.album.tolist():
-        songs_list = []
-        for i, row in df[['album', 'title']].iterrows():
-            if album == row.album:
-                songs_list.append(row.title)
-        if len(songs_list) > 5:
-            songs_list = random.sample(songs_list, 5)
-        albums_of_songs[album] = songs_list
-    albums['songs'] = list(albums_of_songs.values())
     return albums
 
 app = flask.Flask(__name__)
@@ -95,6 +86,15 @@ def scrape():
     except:
         return render_template('scraper_error.html')
 
+@app.route('/artist_data', methods=['POST', 'GET'])
+def artist_data():
+    artist = flask.request.args['name']
+    df = pd.read_csv(f'data/{artist}.csv')
+    df = df.drop(df[df.release_date == 'None'].index, axis=0)
+    df = df[['primary_artist', 'album', 'release_date', 'title', 'url']].sort_values(by='release_date').reset_index()
+    df = HTML(df.drop('index', axis=1).to_html(classes="table table-stripped"))
+    return render_template('artist_data.html', data = df)
+
 @app.route('/artist', methods=['POST', 'GET'])
 def artist():
     try:
@@ -113,7 +113,8 @@ def artist():
         script_2, div_2 = components(chart_2)
         script_3, div_3 = components(chart_3)
         image = f'static/images/word_clouds/{stripped_artist}.png'
-        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image, the_script_3=script_3, the_div_3=div_3)
+        data_url = f'/artist_data?name={artist}'
+        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image, the_script_3=script_3, the_div_3=div_3, data_url=data_url)
     except:
         return render_template('inventory_error.html')
 

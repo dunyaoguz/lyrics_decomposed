@@ -89,7 +89,7 @@ def view_albums(df):
     b = int(df['release_year'].max())
     source = ColumnDataSource(df)
     p = figure(plot_width=950, plot_height=180, x_range=(a-1, b+1), y_range=(0, 0.5), toolbar_location='above',
-    title='View a random sample of max. 5 songs from each album', tools='pan,box_zoom,reset,save')
+    title='Albums discography', tools='pan,box_zoom,reset,save')
 
     p.scatter(df['release_year'], 0.25, marker='square_cross', fill_color='#D3D3D3', line_color='#696969', line_width=1.5, size=15)
     h = p.scatter('release_year', 0.25, marker='square', source=df, size=35, fill_color='white', hover_fill_color='#DCDCDC', fill_alpha=0,
@@ -97,12 +97,8 @@ def view_albums(df):
     TOOLTIPS = """
     <div>
         <div width="10px">
-            <span style="font-size: 15px;">Album: </span>
+            <span style="font-size: 15px;">Name: </span>
             <span style="font-size: 17px; font-weight: bold;">@album</span>
-        </div>
-        <div width="10px">
-            <span style="font-size: 15px;">Songs: </span>
-            <span style="font-size: 17px; color: gray;">@songs</span>
         </div>
     </div>
     """

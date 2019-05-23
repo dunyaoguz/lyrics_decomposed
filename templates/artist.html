@@ -35,13 +35,11 @@
       {{ the_script_1|safe }}
     </div>
     <div class="chart">
-      <br>
-      <br>
+      <br><br>
       {{ the_div_3|safe }}
       {{ the_script_3|safe }}
     </div>
-    <br>
-    <br>
+    <br><br><br>
     <p><font size="5">Clusters of songs which are similar in sentiment;</p></font>
     <div class="chart">
       <br>
@@ -55,5 +53,7 @@
       <img src= {{ image }} alt="dt" width="700"/>
     </div>
     <br>
+    <a href="{{ data_url }}" class="data">View the full list of songs on file for {{ artist }}</a>
+    <br><br><br>
   </body>
 </html>

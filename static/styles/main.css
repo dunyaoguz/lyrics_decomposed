@@ -12,6 +12,34 @@
 	display: inline-block;
 }
 
+.data {
+	position: relative;
+	left: 500px;
+}
+
+.data:link, .data:visited {
+	color: #000;
+	font-size: 18px;
+	background-color: #fff;
+	text-decoration: none;
+	padding: 12px 20px;
+	text-align: center;
+	display: inline-block;
+	border-color: black;
+	border-radius: 12px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.data:hover {
+	 text-decoration: none;
+	 text-align: center;
+	 background-color:#5cbdea;
+	 color: white;
+	 border-radius: 12px;
+	 border-color: #5cbdea;
+}
+
 .heading {
 	font-size:90px;
 	-webkit-text-stroke-width: 1px;
@@ -40,6 +68,13 @@ p {
 	text-align: center;
 	padding-left: 12%;
 	padding-right: 12%;
+}
+
+.table {
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-top: 1%;
+	padding-bottom: 1%;
 }
 
 /* main page */
@@ -105,13 +140,11 @@ form {
 
 form input {
 	background-color: #fff;
-	/* background-color: #f8f9fa; */
 }
 
 input::placeholder {
   color: #bababa;
 	font-size:90px;
-	/* background-color: #f8f9fa; */
 }
 
 .form {
@@ -133,6 +166,7 @@ input::placeholder {
 
 .home {
 	padding-left: 65%;
+	position: relative;
 }
 
 .submit_button {
@@ -144,11 +178,13 @@ input::placeholder {
 	outline: None;
 	border-color: black;
 	position: relative;
+	border-radius: 12px;
 	left: 850px;
 }
 
 .submit_button:hover{
 	background-color:#5cbdea;
 	color: white;
+	border-radius: 12px;
 	border-color: #5cbdea;
 }
