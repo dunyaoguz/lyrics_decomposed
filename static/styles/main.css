@@ -2,6 +2,11 @@
 	font-size: 200%;
 }
 
+.about {
+	padding-left: 29%;
+	position: relative;
+}
+
 /* artist page */
 
 .artist {
@@ -14,15 +19,15 @@
 
 .data {
 	position: relative;
-	left: 500px;
+	left: 430px;
 }
 
 .data:link, .data:visited {
 	color: #000;
-	font-size: 18px;
-	background-color: #fff;
+	font-size: 20px;
+	background-color: #f8f9fa;
 	text-decoration: none;
-	padding: 12px 20px;
+	padding: 8px 18px;
 	text-align: center;
 	display: inline-block;
 	border-color: black;
@@ -172,6 +177,8 @@ input::placeholder {
 .submit_button {
 	font-size: 25px;
 	text-align: center;
+	padding-top: 0.5%;
+	padding-bottom: 0.5%;
 	padding-left: 2%;
 	padding-right: 2%;
 	color: black;
@@ -179,6 +186,7 @@ input::placeholder {
 	border-color: black;
 	position: relative;
 	border-radius: 12px;
+	background:#f8f9fa;
 	left: 850px;
 }
 
