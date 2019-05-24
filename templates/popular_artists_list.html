@@ -10,19 +10,13 @@
       <a class="navbar-brand" href="#">
         <img src="static/images/musical-notes-symbols.png" width="50" height="50" class="d-inline-block align-top" alt="">&nbsp;&nbsp;
         <span class="nav-header" style="font-family:Diskoteque">Lyrics Decomposed</span>
+        <a href="/" class="home"><img src="static/images/home.png" width="50" height="50" class="align-top" alt=""/></a>
       </a>
-      <div class="about"><a href="/about" class="data">About</a></div>
       </button>
     </nav>
+    <br>
   </head>
   <body>
-    <div class="intro">
-    <p><img src="static/images/audio.png" width="120" height="120"/></p>
-    <p>Welcome to <b>LYRICS DECOMPOSED</b></p>
-    <p>Whose lyrics would you like to analyse today?</p>
-    </div>
-    <div><button onclick="window.location.href = '/popular_artists'">Popular artists of the 2000s&nbsp;&nbsp;<img src="static/images/band.png" width="70" height="70"/></button></div>
-    <div><button onclick="window.location.href = '/search'">Select specific artist&nbsp;&nbsp;<img src="static/images/singer.png" width="70" height="70"/></button></div>
-    <div><button onclick="window.location.href = '/compare_search'">Compare two artists&nbsp;&nbsp;<img src="static/images/balance.png" width="70" height="70"/></button></div>
+    <div class="table_2"><div class='table table-striped table-hover table-responsive'> {{ data }} </div></div>
   </body>
 </html>

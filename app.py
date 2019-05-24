@@ -8,6 +8,7 @@ from lyrics_scraper import scrape_artist
 from sentiment_extractor import extract_sentiments
 from IPython.display import HTML
 from helper import read_data, cluster_data, albums_data
+from word_cloud_generator import generate_word_cloud
 
 app = flask.Flask(__name__)
 
@@ -44,6 +45,7 @@ def scrape():
             artist = inputs['name']
             scrape_artist(artist)
             extract_sentiments(artist)
+            generate_word_cloud(artist)
         return render_template('scrape.html')
     except:
         return render_template('scraper_error.html')
@@ -79,6 +81,16 @@ def artist():
         return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image, the_script_3=script_3, the_div_3=div_3, data_url=data_url)
     except:
         return render_template('inventory_error.html')
+
+@app.route('/popular_artists', methods=['POST', 'GET'])
+def popular_artists():
+    return render_template('popular_artists.html')
+
+@app.route('/popular_artists_list', methods=['POST', 'GET'])
+def popular_artists_list():
+    df = pd.read_csv('data/list_of_artists.csv')[['name']]
+    df = HTML(df.to_html(classes="table table-stripped"))
+    return render_template('popular_artists_list.html', data = df)
 
 if __name__ == '__main__':
     HOST = '127.0.0.1'

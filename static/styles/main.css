@@ -3,23 +3,13 @@
 }
 
 .about {
-	padding-left: 29%;
+	padding-left: 62%;
 	position: relative;
 }
 
-/* artist page */
-
-.artist {
-	text-align: center;
-}
-
-.container {
-	display: inline-block;
-}
-
-.data {
+.home {
+	padding-left: 65%;
 	position: relative;
-	left: 430px;
 }
 
 .data:link, .data:visited {
@@ -43,6 +33,20 @@
 	 color: white;
 	 border-radius: 12px;
 	 border-color: #5cbdea;
+}
+
+/* artist page */
+
+.artist {
+	text-align: center;
+}
+
+.container {
+	display: inline-block;
+}
+
+.more_info {
+	text-align: center;
 }
 
 .heading {
@@ -75,9 +79,18 @@ p {
 	padding-right: 12%;
 }
 
+/* popular artists list page and artist data page */
+
 .table {
 	padding-left: 2%;
 	padding-right: 2%;
+	padding-top: 1%;
+	padding-bottom: 1%;
+}
+
+.table_2 {
+	padding-left: 25%;
+	padding-right: 25%;
 	padding-top: 1%;
 	padding-bottom: 1%;
 }
@@ -167,11 +180,6 @@ input::placeholder {
 .scrape-info {
 	text-align: center;
 	padding-top: 10%;
-}
-
-.home {
-	padding-left: 65%;
-	position: relative;
 }
 
 .submit_button {

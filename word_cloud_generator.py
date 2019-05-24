@@ -5,8 +5,10 @@ import pandas as pd
 import numpy as np
 import random
 
-def word_cloud_generator(df, artist):
+def generate_word_cloud(artist):
     '''Creates a word cloud for the given artist and saves the file as png'''
+    df = pd.read_csv(f'data/{artist}.csv')
+    df = df.dropna()
     cv = CountVectorizer(min_df=0, stop_words="english", max_features=200)
     counts = cv.fit_transform(df['lyrics'])
     words_freq = pd.DataFrame(counts.todense(), columns = cv.get_feature_names())
@@ -35,6 +37,4 @@ def word_cloud_generator(df, artist):
 if __name__ == '__main__':
     artists = pd.read_csv('data/list_of_artists.csv')
     for artist in artists.name.tolist():
-        df = pd.read_csv(f'data/{artist}.csv')
-        df = df.dropna()
-        word_cloud_generator(df, artist)
+      word_cloud_generator(artist)
