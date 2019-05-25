@@ -74,3 +74,26 @@ def all_artists_data():
     df.drop(df[df['release_date'].isna()].index, axis=0, inplace=True)
     df.to_csv('sentiment_data/filtered_grand_df.csv')
     return df
+
+def topics_per_year():
+    df_2000 = pd.read_csv(f'topics_data/2000.csv', index_col=0)
+    df_2001 = pd.read_csv(f'topics_data/2001.csv', index_col=0)
+    df_2002 = pd.read_csv(f'topics_data/2002.csv', index_col=0)
+    df_2003 = pd.read_csv(f'topics_data/2003.csv', index_col=0)
+    df_2004 = pd.read_csv(f'topics_data/2004.csv', index_col=0)
+    df_2005 = pd.read_csv(f'topics_data/2005.csv', index_col=0)
+    df_2006 = pd.read_csv(f'topics_data/2006.csv', index_col=0)
+    df_2007 = pd.read_csv(f'topics_data/2007.csv', index_col=0)
+    df_2008 = pd.read_csv(f'topics_data/2008.csv', index_col=0)
+    df_2009 = pd.read_csv(f'topics_data/2009.csv', index_col=0)
+    df_2010 = pd.read_csv(f'topics_data/2010.csv', index_col=0)
+    df_2011 = pd.read_csv(f'topics_data/2011.csv', index_col=0)
+    df_2012 = pd.read_csv(f'topics_data/2012.csv', index_col=0)
+    df_2013 = pd.read_csv(f'topics_data/2013.csv', index_col=0)
+    df_2014 = pd.read_csv(f'topics_data/2014.csv', index_col=0)
+    df_2015 = pd.read_csv(f'topics_data/2015.csv', index_col=0)
+    df_2016 = pd.read_csv(f'topics_data/2016.csv', index_col=0)
+    df_2017 = pd.read_csv(f'topics_data/2017.csv', index_col=0)
+    df_2018 = pd.read_csv(f'topics_data/2018.csv', index_col=0)
+    df_2019 = pd.read_csv(f'topics_data/2019.csv', index_col=0)
+    return df_2000, df_2001, df_2002, df_2003, df_2004, df_2005, df_2006, df_2007, df_2008, df_2009, df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019

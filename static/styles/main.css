@@ -204,3 +204,14 @@ input::placeholder {
 	border-radius: 12px;
 	border-color: #5cbdea;
 }
+
+/* all artists */
+
+.years {
+	text-align: center;
+}
+
+.data:focus {
+	background:#5cbdea;
+	color: #fff;
+}

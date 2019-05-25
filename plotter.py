@@ -6,49 +6,36 @@ def sentiment_plot(df, y_max):
     b = int(df['release_year'].max())
     p = figure(plot_width=1000, plot_height=450, x_range=(a-1, b+1), y_range=(0, y_max), x_axis_label='Years',
                y_axis_label='Percent of sentiments expressed', toolbar_location='above')
-
+    # sentiment line plots
     r0 = p.line(df['release_year'], df['disgust'], color='red', line_dash="4 4", line_width=3)
     r1 = p.circle(df['release_year'], df['disgust'], fill_color='red', size=8, color='red')
-
     r2 = p.line(df['release_year'], df['sadness'], color='navy', line_dash="4 4", line_width=3)
     r3 = p.circle(df['release_year'], df['sadness'], fill_color='navy', size=8, color='navy')
-
     r4 = p.line(df['release_year'], df['joy'], color='yellowgreen', line_dash="4 4", line_width=3)
     r5 = p.circle(df['release_year'], df['joy'], fill_color='yellowgreen', size=8, color='yellowgreen')
-
     r6 = p.line(df['release_year'], df['surprise'], color='blueviolet', line_dash="4 4", line_width=3)
     r7 = p.circle(df['release_year'], df['surprise'], fill_color='blueviolet', size=8, color='blueviolet')
-
     r8 = p.line(df['release_year'], df['fear'], color='orange', line_dash="4 4", line_width=3)
     r9 = p.circle(df['release_year'], df['fear'], fill_color='orange', size=8, color='orange')
-
     r10 = p.line(df['release_year'], df['anticipation'], color='hotpink', line_dash="4 4", line_width=3)
     r11 = p.circle(df['release_year'], df['anticipation'], fill_color='hotpink', size=8, color='hotpink')
-
     r12 = p.line(df['release_year'], df['anger'], line_dash="4 4", color='deepskyblue', line_width=3)
     r13 = p.circle(df['release_year'], df['anger'], size=8, color='deepskyblue', fill_color='deepskyblue')
-
+    # hover circles
     p.circle(df['release_year'], df['anger'], size=20, fill_color='white', hover_fill_color='deepskyblue',
                      fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='deepskyblue')
-
     p.circle(df['release_year'], df['surprise'], size=20, fill_color='white', hover_fill_color='blueviolet',
                         fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='blueviolet')
-
     p.circle(df['release_year'], df['anticipation'], size=20, fill_color='white', hover_fill_color='hotpink',
                             fill_alpha=0.02, hover_alpha=0.2,line_color=None, hover_line_color='hotpink')
-
     p.circle(df['release_year'], df['sadness'], size=20, fill_color='white', hover_fill_color='navy',
                       fill_alpha=0.02, hover_alpha=0.2,line_color=None, hover_line_color='navy')
-
     p.circle(df['release_year'], df['disgust'], size=20, fill_color='white', hover_fill_color='red',
                        fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='red')
-
     p.circle(df['release_year'], df['fear'], size=20, fill_color='white', hover_fill_color='orange',
                     fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='orange')
-
     p.circle(df['release_year'], df['joy'], size=20, fill_color='white', hover_fill_color='yellowgreen',
                    fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='yellowgreen')
-
     legend = Legend(items=[
     ("disgust", [r0, r1]),
     ("sadness", [r2, r3]),
@@ -58,7 +45,6 @@ def sentiment_plot(df, y_max):
     ("anticipation", [r10, r11]),
     ("anger", [r12, r13])
     ], location="center")
-
     TOOLTIPS = """
     <div>
         <div>
@@ -91,7 +77,6 @@ def view_albums(df):
     source = ColumnDataSource(df)
     p = figure(plot_width=950, plot_height=180, x_range=(a-1, b+1), y_range=(0, 0.5), toolbar_location='above',
     title='Albums discography', tools='pan,box_zoom,reset,save')
-
     p.scatter(df['release_year'], 0.25, marker='square_cross', fill_color='#D3D3D3', line_color='#696969', line_width=1.5, size=15)
     h = p.scatter('release_year', 0.25, marker='square', source=df, size=35, fill_color='white', hover_fill_color='#DCDCDC', fill_alpha=0,
     hover_alpha=0.2, line_color=None, hover_line_color='#DCDCDC')
@@ -139,7 +124,6 @@ def cluster_plot(df):
     p1.background_fill_color = "#f2f2f2"
     p1.grid.grid_line_color = "white"
     p1.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
-
     # 4 neighbors
     p2 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
                 x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
@@ -147,7 +131,6 @@ def cluster_plot(df):
     p2.background_fill_color = "#f2f2f2"
     p2.grid.grid_line_color = "white"
     p2.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
-
     # 5 neighbors
     p3 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
                 x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
@@ -155,7 +138,6 @@ def cluster_plot(df):
     p3.background_fill_color = "#f2f2f2"
     p3.grid.grid_line_color = "white"
     p3.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
-
     tab1 = Panel(child=p1, title="3 clusters")
     tab2 = Panel(child=p2, title="4 clusters")
     tab3 = Panel(child=p3, title="5 clusters")
@@ -165,31 +147,12 @@ def cluster_plot(df):
 def polarity_plot(df):
     a = int(df['release_year'].min())
     b = int(df['release_year'].max())
-    p = figure(plot_width=1050, plot_height=350, x_range=(2000, 2020), y_range=(0.1, 0.5), x_axis_label='Years',
-               toolbar_location='above')
-
+    p = figure(plot_width=1050, plot_height=350, x_range=(2000, 2020), y_range=(0.1, 0.5), x_axis_label='Years', toolbar_location='above')
     source = ColumnDataSource(df)
     r0 = p.line(df['release_year'], df['polarity'],  color='black', line_width=4, legend="composite polarity score")
     r1 = p.scatter(df['release_year'], df['polarity'], fill_color='white', size=12, color='black', marker='circle', legend="composite polarity score")
-    p.circle(df['release_year'], df['polarity'], size=20, fill_color='gray', hover_fill_color='gray', fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='gray')
-
-    source = ColumnDataSource(df)
     labels = LabelSet(x='release_year', y='polarity', text='text', source=source, y_offset=13, text_font_size="12pt", text_color="#555555", text_align='center')
     p.add_layout(labels)
-
-    # TOOLTIPS = """
-    # <div>
-    #     <div>
-    #         <span style="font-size: 15px;">Year: </span>
-    #         <span style="font-size: 17px; font-weight: bold;">$x{0}</span>
-    #     </div>
-    #     <div>
-    #         <span style="font-size: 15px;">Polarity: </span>
-    #         <span style="font-size: 17px; font-weight: bold;">$y{0.00}</span>
-    #     </div>
-    # </div>
-    # """
-    # p.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     p.xaxis.major_tick_line_color = 'firebrick'
     p.xaxis.major_tick_line_width = 5
     p.xaxis.minor_tick_line_color = 'orange'
