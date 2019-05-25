@@ -7,6 +7,7 @@ import random
 
 def generate_word_cloud(artist):
     '''Creates a word cloud for the given artist and saves the file as png'''
+    artist = artist.replace(' ', '')
     df = pd.read_csv(f'data/{artist}.csv')
     df = df.dropna()
     cv = CountVectorizer(min_df=0, stop_words="english", max_features=200)
