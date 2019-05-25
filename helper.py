@@ -26,7 +26,7 @@ def read_data(df):
 def cluster_data(df):
     '''Cluster songs based on their sentiments'''
     pca = PCA(n_components=2)
-    pca = pca.fit_transform(df[['anger', 'anticipation', 'disgust', 'fear', 'joy', 'surprise', 'trust']])
+    pca = pca.fit_transform(df[['anger', 'anticipation', 'disgust', 'fear', 'joy', 'surprise', 'trust', 'positive', 'negative']])
     pca = pd.DataFrame(pca, columns = ['Component1', 'Component2'])
     KMeans_3 = KMeans(n_clusters=3)
     KMeans_3.fit(pca)
@@ -43,9 +43,6 @@ def cluster_data(df):
     pca['color_3'] = pca['cluster_3'].map(lambda x: colors_3[x])
     pca['color_4'] = pca['cluster_4'].map(lambda x: colors_4[x])
     pca['color_5'] = pca['cluster_5'].map(lambda x: colors_5[x])
-    pca['title'] = df['title']
-    pca['album'] = df['album']
-    pca = pca.replace('None', 'Unknown')
     return pca
 
 def albums_data(df):

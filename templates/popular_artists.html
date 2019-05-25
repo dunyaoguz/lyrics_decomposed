@@ -40,9 +40,14 @@
       </div>
       <br>
       <p><font size="5">Clusters of artists similar in sentiments expressed; </p></font>
+      <div class="chart">
+        {{ the_div_3|safe }}
+        {{ the_script_3|safe }}
+      </div>
+      <br>
       <p><font size="5">Predominant themes;</p></font>
       <div class="years">
-        <p><font size="3">*scroll down after clicking to see*</p></font>
+        <p><font size="3">*click to collapse results</p></font>
         <script src="static/styles/javascript.js"></script>
       <div>
         <a href="#0" class="data" onclick="myFunction_1()">2000</a>
@@ -230,5 +235,6 @@
         <img src="/static/images/word_clouds/2019.png" alt="dt" width="700"/>
       </div>
       </div>
+      <br><br><br>
   </body>
 </html>

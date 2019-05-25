@@ -104,7 +104,6 @@ def view_albums(df):
     return p
 
 def cluster_plot(df):
-    source = ColumnDataSource(df)
     TOOLTIPS = """
     <div>
         <div>
@@ -159,4 +158,21 @@ def polarity_plot(df):
     p.axis.major_tick_out = 10
     p.axis.minor_tick_out = 8
     p.xgrid[0].ticker.desired_num_ticks = 10
+    return p
+
+def artists_cluster(df):
+    TOOLTIPS = """
+    <div>
+        <div width="10px">
+            <span style="font-size: 15px;">Name: </span>
+            <span style="font-size: 17px; font-weight: bold;">@artist</span>
+        </div>
+    </div>
+    """
+    source = ColumnDataSource(df)
+    p = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save', x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
+    p.circle('Component1', 'Component2', size=15, source=source, color='color_4', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
+    p.background_fill_color = "#f2f2f2"
+    p.grid.grid_line_color = "white"
+    p.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     return p
