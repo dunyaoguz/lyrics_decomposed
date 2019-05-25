@@ -19,10 +19,24 @@
   <body>
       <div class="artist">
         <p><img src="static/images/star.png" width="120" height="120" class="d-inline-block align-top" alt=""></p>
-        <p><font size="5">Currently analysing...</font></p>
-        <p><font size="5">Billboard 100 year-end top artists since 2006</font></p>
+        <p><font size="5">Currently analysing <b>{{ songs_no }}</b> songs by...</font></p>
+        <p><font size="5">~<b>350</b> artists who made it to the Billboard 100 year-end charts in 2000s</font></p>
         <br>
         <a href="/popular_artists_list" class="data">View the full list of artists</a>
+      </div>
+      <br><br><br>
+      <p><font size="5">Composite polarity score per year;</p></font>
+      <div class="chart">
+        {{ the_div_2|safe }}
+        <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+        <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+        {{ the_script_2|safe }}
+      </div>
+      <br><br>
+      <p><font size="5">Sentiments expressed in songs per year;</p></font>
+      <div class="chart">
+        {{ the_div_1|safe }}
+        {{ the_script_1|safe }}
       </div>
   </body>
 </html>

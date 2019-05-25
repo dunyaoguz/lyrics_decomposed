@@ -1,10 +1,10 @@
 from bokeh.plotting import figure, output_file, show
 from bokeh.models import HoverTool, Legend, ColumnDataSource, Panel, Tabs, ColumnDataSource, LabelSet
 
-def sentiment_plot(df):
+def sentiment_plot(df, y_max):
     a = int(df['release_year'].min())
     b = int(df['release_year'].max())
-    p = figure(plot_width=1000, plot_height=450, x_range=(a, b), y_range=(0, 0.5), x_axis_label='Years',
+    p = figure(plot_width=1000, plot_height=450, x_range=(a-1, b+1), y_range=(0, y_max), x_axis_label='Years',
                y_axis_label='Percent of sentiments expressed', toolbar_location='above')
 
     r0 = p.line(df['release_year'], df['disgust'], color='red', line_dash="4 4", line_width=3)
@@ -82,6 +82,7 @@ def sentiment_plot(df):
     p.xaxis.minor_tick_line_color = 'orange'
     p.axis.major_tick_out = 10
     p.axis.minor_tick_out = 8
+    p.xgrid[0].ticker.desired_num_ticks = 10
     return p
 
 def view_albums(df):
@@ -160,3 +161,39 @@ def cluster_plot(df):
     tab3 = Panel(child=p3, title="5 clusters")
     tabs = Tabs(tabs=[tab1, tab2, tab3])
     return tabs
+
+def polarity_plot(df):
+    a = int(df['release_year'].min())
+    b = int(df['release_year'].max())
+    p = figure(plot_width=1050, plot_height=350, x_range=(2000, 2020), y_range=(0.1, 0.5), x_axis_label='Years',
+               toolbar_location='above')
+
+    source = ColumnDataSource(df)
+    r0 = p.line(df['release_year'], df['polarity'],  color='black', line_width=4, legend="composite polarity score")
+    r1 = p.scatter(df['release_year'], df['polarity'], fill_color='white', size=12, color='black', marker='circle', legend="composite polarity score")
+    p.circle(df['release_year'], df['polarity'], size=20, fill_color='gray', hover_fill_color='gray', fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='gray')
+
+    source = ColumnDataSource(df)
+    labels = LabelSet(x='release_year', y='polarity', text='text', source=source, y_offset=13, text_font_size="12pt", text_color="#555555", text_align='center')
+    p.add_layout(labels)
+
+    # TOOLTIPS = """
+    # <div>
+    #     <div>
+    #         <span style="font-size: 15px;">Year: </span>
+    #         <span style="font-size: 17px; font-weight: bold;">$x{0}</span>
+    #     </div>
+    #     <div>
+    #         <span style="font-size: 15px;">Polarity: </span>
+    #         <span style="font-size: 17px; font-weight: bold;">$y{0.00}</span>
+    #     </div>
+    # </div>
+    # """
+    # p.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
+    p.xaxis.major_tick_line_color = 'firebrick'
+    p.xaxis.major_tick_line_width = 5
+    p.xaxis.minor_tick_line_color = 'orange'
+    p.axis.major_tick_out = 10
+    p.axis.minor_tick_out = 8
+    p.xgrid[0].ticker.desired_num_ticks = 10
+    return p

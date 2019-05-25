@@ -55,3 +55,22 @@ def albums_data(df):
     df = df.drop(df[df.album == 'None'].index, axis=0)
     albums = df.groupby('album')[['release_year']].min().reset_index().sort_values(by='release_year')
     return albums
+
+def all_artists_data():
+    '''Filter all artists data to only include maximum 200 songs from each artist'''
+    df = pd.read_csv('sentiment_data/grand_df.csv', index_col=0)
+    df['release_date'] = pd.to_datetime(df['release_date'], errors='coerce')
+    df['release_year'] = df['release_date'].dt.year
+    df = df.drop_duplicates()
+    df = df.drop(df[df['release_year'] < 2000].index, axis=0)
+    df = df.drop(df[df['release_year'] > 2019].index, axis=0)
+    count = df.groupby('primary_artist')[['title']].count().sort_values(by='title', ascending=False)
+    artists_with_too_many_songs = count[count.title > 200].index.tolist()
+    for artist in artists_with_too_many_songs:
+        filtered_df = df[df['primary_artist'] == artist]
+        filtered_df = filtered_df.sample(200)
+        df.drop(df[df['primary_artist'] == artist].index, axis=0, inplace=True)
+        df = df.append(filtered_df)
+    df.drop(df[df['release_date'].isna()].index, axis=0, inplace=True)
+    df.to_csv('sentiment_data/filtered_grand_df.csv')
+    return df

@@ -2,12 +2,12 @@ import pandas as pd
 import numpy as np
 import flask
 from flask import render_template, request
-from plotter import sentiment_plot, cluster_plot, view_albums
+from plotter import sentiment_plot, cluster_plot, view_albums, polarity_plot
 from bokeh.embed import components
 from lyrics_scraper import scrape_artist
 from sentiment_extractor import extract_sentiments
 from IPython.display import HTML
-from helper import read_data, cluster_data, albums_data
+from helper import read_data, cluster_data, albums_data, all_artists_data
 from word_cloud_generator import generate_word_cloud
 from topic_modeller import model_topic
 
@@ -70,7 +70,7 @@ def artist():
         df = df.drop_duplicates()
         polarity = round(df.polarity.mean(), 2)
         normalized_df = read_data(df)
-        chart_1 = sentiment_plot(normalized_df)
+        chart_1 = sentiment_plot(normalized_df, 0.4)
         clusters = cluster_data(df)
         chart_2 = cluster_plot(clusters)
         albums = albums_data(df)
@@ -88,7 +88,15 @@ def artist():
 
 @app.route('/popular_artists', methods=['POST', 'GET'])
 def popular_artists():
-    return render_template('popular_artists.html')
+    df = pd.read_csv('sentiment_data/filtered_grand_df.csv')
+    df_normalized = read_data(df)
+    chart_1 = sentiment_plot(df_normalized, 0.15)
+    script_1, div_1 = components(chart_1)
+    polarity = df.groupby('release_year')[['polarity']].mean().reset_index()
+    polarity['text'] = round(polarity['polarity'],2)
+    chart_2 = polarity_plot(polarity)
+    script_2, div_2 = components(chart_2)
+    return render_template('popular_artists.html', the_script_1=script_1, the_div_1=div_1, songs_no=df.shape[0], the_script_2=script_2, the_div_2=div_2)
 
 @app.route('/popular_artists_list', methods=['POST', 'GET'])
 def popular_artists_list():
