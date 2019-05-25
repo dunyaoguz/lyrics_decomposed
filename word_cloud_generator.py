@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import random
 
-def generate_word_cloud(artist):
+def generate_word_cloud(df):
     '''Creates a word cloud for the given artist and saves the file as png'''
     artist = artist.replace(' ', '')
     df = pd.read_csv(f'data/{artist}.csv')
@@ -34,6 +34,13 @@ def generate_word_cloud(artist):
                    background_color='white').fit_words(words_dict)
     wc.to_file(f"static/images/word_clouds/{artist}.png")
     print(f'Created word cloud for {artist}')
+
+# def word_clouds_per_year():
+#     df = pd.read_csv('sentiment_data/filtered_grand_df.csv')
+#     for year in df.release_year.unique().tolist():
+#         filtered_df = df[df.release_year == year]
+#         year_df = generate_word_cloud(filtered_df, year)
+#         print(f'Completed {year}')
 
 if __name__ == '__main__':
     artists = pd.read_csv('data/list_of_artists.csv')
