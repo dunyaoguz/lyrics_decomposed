@@ -9,6 +9,7 @@ from gensim import corpora, models
 from gensim.models.ldamodel import LdaModel
 
 def prepare_corpus(df, stopwords):
+    '''Tokenize and lemmatize lyrics'''
     corpus = []
     tokenizer = RegexpTokenizer(r'\w\w+')
     lemmatizer = WordNetLemmatizer()
@@ -23,6 +24,7 @@ def prepare_corpus(df, stopwords):
     return corpus
 
 def model_topic(artist):
+    '''Extract predominant themes from a given artists' lyrics'''
     df = pd.read_csv(f'data/{artist}.csv')
     s = stopwords.words('english')
     s.extend(['don', 'like', 'ain', 'oh', 'll', 'ooh', 'na', 'just', 've', 'tha', 'yeah', 'gon', 'gonna', 'every',

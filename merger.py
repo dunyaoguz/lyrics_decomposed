@@ -39,5 +39,6 @@ def merge_all_artists():
     grand_df = grand_df.drop(['index'], axis=1)
     grand_df.to_csv('sentiment_data/grand_df.csv')
 
-fetch_popular_artists()
-merge_all_artists()
+if __name__ == '__main__':
+    fetch_popular_artists()
+    merge_all_artists()

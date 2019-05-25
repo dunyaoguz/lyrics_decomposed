@@ -5,6 +5,7 @@ import random
 from sklearn.decomposition import PCA
 
 def read_data(df):
+    '''Prepare the data for the sentiment plot'''
     df_normalized = df.groupby('release_date')[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].sum()
     sums = df_normalized['anger'] + df_normalized['positive'] + df_normalized['negative'] + df_normalized['anticipation'] + df_normalized['disgust'] + df_normalized['fear'] + df_normalized['joy'] + df_normalized['sadness'] + df_normalized['surprise'] + df_normalized['trust']
     df_normalized['sum'] = sums
@@ -23,6 +24,7 @@ def read_data(df):
     return df_normalized
 
 def cluster_data(df):
+    '''Cluster songs based on their sentiments'''
     pca = PCA(n_components=2)
     pca = pca.fit_transform(df[['anger', 'anticipation', 'disgust', 'fear', 'joy', 'surprise', 'trust']])
     pca = pd.DataFrame(pca, columns = ['Component1', 'Component2'])
@@ -47,6 +49,7 @@ def cluster_data(df):
     return pca
 
 def albums_data(df):
+    '''Get albums for the discography plot'''
     df['release_date'] = pd.to_datetime(df['release_date'])
     df['release_year'] = df['release_date'].dt.year
     df = df.drop(df[df.album == 'None'].index, axis=0)
