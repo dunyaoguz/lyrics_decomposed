@@ -38,31 +38,31 @@ def compare_search():
 
 @app.route('/compare_artists', methods=['POST', 'GET'])
 def compare_artists():
-    try:
-        artist_1 = flask.request.args['name_1']
-        artist_2 = flask.request.args['name_2']
-        stripped_artist_1 = artist_1.lower().replace(' ', '')
-        stripped_artist_2 = artist_2.lower().replace(' ', '')
-        df_1 = pd.read_csv(f'sentiment_data/{stripped_artist_1}.csv')
-        df_2 = pd.read_csv(f'sentiment_data/{stripped_artist_2}.csv')
-        normalized_df_1 = read_data(df_1)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
-        normalized_df_2 = read_data(df_2)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
-        anger = (normalized_df_1['anger'] - normalized_df_2['anger'])/normalized_df_1['anger'] * 100
-        anticipation = (normalized_df_1['anticipation'] - normalized_df_2['anticipation'])/normalized_df_1['anticipation'] * 100
-        disgust = (normalized_df_1['disgust'] - normalized_df_2['disgust'])/normalized_df_1['disgust'] * 100
-        fear = (normalized_df_1['fear'] - normalized_df_2['fear'])/normalized_df_1['fear'] * 100
-        joy = (normalized_df_1['joy'] - normalized_df_2['joy'])/normalized_df_1['joy'] * 100
-        sadness = (normalized_df_1['sadness'] - normalized_df_2['sadness'])/normalized_df_1['sadness'] * 100
-        surprise = (normalized_df_1['surprise'] - normalized_df_2['surprise'])/normalized_df_1['surprise'] * 100
-        trust = (normalized_df_1['trust'] - normalized_df_2['trust'])/normalized_df_1['trust'] * 100
-        positivity = (normalized_df_1['positive'] - normalized_df_2['positive'])/normalized_df_1['positive'] * 100
-        topics_1 = pd.read_csv(f'topics_data/{stripped_artist_1}.csv', index_col=0)
-        topics_2 = pd.read_csv(f'topics_data/{stripped_artist_2}.csv', index_col=0)
-        return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), artist_1_proper=artist_1, artist_2_proper=artist_2, positivity=round(positivity, 2), anger=round(anger, 2),
-        anticipation=round(anticipation, 2), disgust=round(disgust, 2), fear=round(fear, 2), joy=round(joy, 2), sadness=round(sadness, 2), surprise=round(surprise, 2), trust=round(trust, 2), topic_1=topics_1['words'][0],
-        topic_2=topics_1['words'][1], topic_3=topics_1['words'][3], topic_4=topics_2['words'][0], topic_5=topics_2['words'][1], topic_6=topics_2['words'][2])
-    except:
-        return render_template('inventory_error.html')
+    # try:
+    artist_1 = flask.request.args['name_1']
+    artist_2 = flask.request.args['name_2']
+    stripped_artist_1 = artist_1.lower().replace(' ', '').replace('&', '')
+    stripped_artist_2 = artist_2.lower().replace(' ', '').replace('&', '')
+    df_1 = pd.read_csv(f'sentiment_data/{stripped_artist_1}.csv')
+    df_2 = pd.read_csv(f'sentiment_data/{stripped_artist_2}.csv')
+    normalized_df_1 = read_data(df_1)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
+    normalized_df_2 = read_data(df_2)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
+    anger = (normalized_df_1['anger'] - normalized_df_2['anger'])/normalized_df_1['anger'] * 100
+    anticipation = (normalized_df_1['anticipation'] - normalized_df_2['anticipation'])/normalized_df_1['anticipation'] * 100
+    disgust = (normalized_df_1['disgust'] - normalized_df_2['disgust'])/normalized_df_1['disgust'] * 100
+    fear = (normalized_df_1['fear'] - normalized_df_2['fear'])/normalized_df_1['fear'] * 100
+    joy = (normalized_df_1['joy'] - normalized_df_2['joy'])/normalized_df_1['joy'] * 100
+    sadness = (normalized_df_1['sadness'] - normalized_df_2['sadness'])/normalized_df_1['sadness'] * 100
+    surprise = (normalized_df_1['surprise'] - normalized_df_2['surprise'])/normalized_df_1['surprise'] * 100
+    trust = (normalized_df_1['trust'] - normalized_df_2['trust'])/normalized_df_1['trust'] * 100
+    positivity = (normalized_df_1['positive'] - normalized_df_2['positive'])/normalized_df_1['positive'] * 100
+    topics_1 = pd.read_csv(f'topics_data/{stripped_artist_1}.csv', index_col=0)
+    topics_2 = pd.read_csv(f'topics_data/{stripped_artist_2}.csv', index_col=0)
+    return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), artist_1_proper=artist_1, artist_2_proper=artist_2, positivity=round(positivity, 2), anger=round(anger, 2),
+    anticipation=round(anticipation, 2), disgust=round(disgust, 2), fear=round(fear, 2), joy=round(joy, 2), sadness=round(sadness, 2), surprise=round(surprise, 2), trust=round(trust, 2), topic_1=topics_1['words'][0],
+    topic_2=topics_1['words'][1], topic_3=topics_1['words'][3], topic_4=topics_2['words'][0], topic_5=topics_2['words'][1], topic_6=topics_2['words'][2])
+    # except:
+    #     return render_template('inventory_error.html')
 
 @app.route('/scrape', methods=['GET', 'POST'])
 def scrape():
@@ -144,8 +144,8 @@ def popular_artists():
 
 @app.route('/popular_artists_list', methods=['POST', 'GET'])
 def popular_artists_list():
-    df = pd.read_csv('data/list_of_artists.csv')[['name']]
-    df = HTML(df.to_html(classes="table table-stripped"))
+    df = pd.read_csv('sentiment_data/grand_df.csv')['primary_artist'].unique()
+    df = HTML(pd.DataFrame(df, columns=['Name']).to_html(classes="table table-stripped"))
     return render_template('popular_artists_list.html', data = df)
 
 if __name__ == '__main__':

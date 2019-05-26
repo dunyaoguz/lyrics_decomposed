@@ -11,7 +11,7 @@ def read_data(df):
     df_normalized['sum'] = sums
     for col in df_normalized.columns:
         df_normalized[col] = df_normalized[col].apply(int)
-    df_normalized.index = pd.to_datetime(df_normalized.index)
+    df_normalized.index = pd.to_datetime(df_normalized.index, errors='coerce')
     df_normalized = df_normalized.resample('Y').sum()
     cols = list(df_normalized.columns)
     zeros = (df_normalized.anger == 0) & (df_normalized.positive == 0) & (df_normalized.negative == 0) & (df_normalized.anticipation == 0) & (df_normalized.disgust == 0) & (df_normalized.fear == 0) & (df_normalized.joy == 0) & (df_normalized.sadness == 0) & (df_normalized.surprise == 0) & (df_normalized.trust == 0)
@@ -47,7 +47,7 @@ def cluster_data(df):
 
 def albums_data(df):
     '''Get albums for the discography plot'''
-    df['release_date'] = pd.to_datetime(df['release_date'])
+    df['release_date'] = pd.to_datetime(df['release_date'], errors='coerce')
     df['release_year'] = df['release_date'].dt.year
     df = df.drop(df[df.album == 'None'].index, axis=0)
     albums = df.groupby('album')[['release_year']].min().reset_index().sort_values(by='release_year')
