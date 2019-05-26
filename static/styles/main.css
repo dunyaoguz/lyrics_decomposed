@@ -150,7 +150,7 @@ button:hover:before,button:hover:after{
 /* search page */
 
 form {
-	padding-left: 4%;
+	padding-left: 2%;
 	outline: None;
 	width: 100%;
 	border-color: #fff;
@@ -162,11 +162,11 @@ form input {
 
 input::placeholder {
   color: #bababa;
-	font-size:90px;
+	font-size:70px;
 }
 
 .form {
-  font-size: 90px;
+  font-size: 70px;
 	font-family: monospace;
   height: 120px;
   display: inline-block;
@@ -179,7 +179,7 @@ input::placeholder {
 
 .scrape-info {
 	text-align: center;
-	padding-top: 10%;
+	padding-top: 5%;
 }
 
 .submit_button {
@@ -195,7 +195,7 @@ input::placeholder {
 	position: relative;
 	border-radius: 12px;
 	background:#f8f9fa;
-	left: 850px;
+	left: 250px;
 }
 
 .submit_button:hover{
@@ -214,4 +214,11 @@ input::placeholder {
 .data:focus {
 	background:#5cbdea;
 	color: #fff;
+}
+
+/* artists comparison */
+
+.polarity_compare {
+	font-size:80px;
+	font-family:College;
 }
