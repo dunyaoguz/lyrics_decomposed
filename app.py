@@ -41,8 +41,8 @@ def compare_artists():
     # try:
     artist_1 = flask.request.args['name_1']
     artist_2 = flask.request.args['name_2']
-    stripped_artist_1 = artist_1.lower().replace(' ', '').replace('&', '')
-    stripped_artist_2 = artist_2.lower().replace(' ', '').replace('&', '')
+    stripped_artist_1 = artist_1.lower().replace(' ', '').replace('&', '').replace('é', 'e')
+    stripped_artist_2 = artist_2.lower().replace(' ', '').replace('&', '').replace('é', 'e')
     df_1 = pd.read_csv(f'sentiment_data/{stripped_artist_1}.csv')
     df_2 = pd.read_csv(f'sentiment_data/{stripped_artist_2}.csv')
     normalized_df_1 = read_data(df_1)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
