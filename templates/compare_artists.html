@@ -29,10 +29,18 @@
           </div>
       </div>
   </body>
-  <p><font size="5">Polarity comparison;</font></p>
-  <p><span class="polarity_compare">{{ polarity_1 }}</span>
-     &nbsp;<font size="5"> vs </font>&nbsp;
-     <span class="polarity_compare">{{ polarity_2 }}</span></p>
-  <p><font size="5">Sentiments comparison;</font></p>
+  <br>
+  <p><font size="5">Compared to {{ artist_2_proper }}, {{ artist_1_proper }} is...</font></p>
+  <p><font size="6">👍</font><b><font size="4">  &nbsp;{{ positivity }}</b>% more positive</font></p>
+  <p><font size="6">😡</font><b><font size="4">  &nbsp;{{ anger }}</b>% angrier</font></p>
+  <p><font size="6">😲</font><b><font size="4">  &nbsp;{{ anticipation }}</b>% more full of anticipation</font></p>
+  <p><font size="6">🤮</font><b><font size="4">  &nbsp;{{ disgust }}</b>% more disgusted</font></p>
+  <p><font size="6">🙀</font><b><font size="4">  &nbsp;{{ fear }}</b>% more fearful</font></p>
+  <p><font size="6">😁</font><b><font size="4">  &nbsp;{{ joy }}</b>% more joyful</font></p>
+  <p><font size="6">😔</font><b><font size="4">  &nbsp;{{ sadness }}</b>% sadder</font></p>
+  <p><font size="6">🥳</font><b><font size="4">  &nbsp;{{ surprise }}</b>% more surprised</font></p>
+  <p><font size="6">😊</font><b><font size="4">  &nbsp;{{ trust }}</b>% more trusting</font></p>
+
+
 
 </html>

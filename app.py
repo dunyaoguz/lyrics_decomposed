@@ -43,11 +43,23 @@ def compare_artists():
         artist_2 = flask.request.args['name_2']
         stripped_artist_1 = artist_1.lower().replace(' ', '')
         stripped_artist_2 = artist_2.lower().replace(' ', '')
+        stripped_artist_1 = 'eminem'
+        stripped_artist_2 = 'drake'
         df_1 = pd.read_csv(f'sentiment_data/{stripped_artist_1}.csv')
         df_2 = pd.read_csv(f'sentiment_data/{stripped_artist_2}.csv')
-        polarity_1 = round(df_1.polarity.mean(), 2)
-        polarity_2 = round(df_2.polarity.mean(), 2)
-        return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), polarity_1=polarity_1, polarity_2=polarity_2)
+        normalized_df_1 = read_data(df_1)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
+        normalized_df_2 = read_data(df_2)[['anger', 'positive', 'negative', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].mean()
+        anger = (normalized_df_1['anger'] - normalized_df_2['anger'])/normalized_df_1['anger']
+        anticipation = (normalized_df_1['anticipation'] - normalized_df_2['anticipation'])/normalized_df_1['anticipation']
+        disgust = (normalized_df_1['disgust'] - normalized_df_2['disgust'])/normalized_df_1['disgust']
+        fear = (normalized_df_1['fear'] - normalized_df_2['fear'])/normalized_df_1['fear']
+        joy = (normalized_df_1['joy'] - normalized_df_2['joy'])/normalized_df_1['joy']
+        sadness = (normalized_df_1['sadness'] - normalized_df_2['sadness'])/normalized_df_1['sadness']
+        surprise = (normalized_df_1['surprise'] - normalized_df_2['surprise'])/normalized_df_1['surprise']
+        trust = (normalized_df_1['trust'] - normalized_df_2['trust'])/normalized_df_1['trust']
+        positivity = (normalized_df_1['positive'] - normalized_df_2['positive'])/normalized_df_1['positive']
+        return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), artist_1_proper=artist_1, artist_2_proper=artist_2, positivity=round(positivity, 2), anger=round(anger, 2),
+        anticipation=round(anticipation, 2), disgust=round(disgust, 2), fear=round(fear, 2), joy=round(joy, 2), sadness=round(sadness, 2), surprise=round(surprise, 2), trust=round(trust, 2))
     except:
         return render_template('inventory_error.html')
 
