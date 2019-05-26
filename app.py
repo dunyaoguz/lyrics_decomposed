@@ -24,25 +24,27 @@ def about():
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-    df = pd.read_csv('data/list_of_artists.csv')
-    random = df['name'].sample(1).tolist()[0]
+    df = pd.read_csv('sentiment_data/filtered_grand_df.csv')
+    random = df['primary_artist'].sample(1).tolist()[0]
     url = "/artist?name=" + random
     return render_template('search.html', feeling_lucky=url)
 
 @app.route('/compare_search', methods=['POST', 'GET'])
 def compare_search():
-    df = pd.read_csv('data/list_of_artists.csv')
-    randoms = df['name'].sample(2).tolist()
-    url = "/compare_artists?name_1=" + randoms[0] + "&name_2=" + randoms[1]
+    df = pd.read_csv('sentiment_data/filtered_grand_df.csv')
+    randoms = df['primary_artist'].sample(2).tolist()
+    url = "/compare_artists?name_1=" + randoms[0].replace(' ', '+') + "&name_2=" + randoms[1].replace(' ', '+')
     return render_template('compare_search.html', feeling_lucky=url)
 
 @app.route('/compare_artists', methods=['POST', 'GET'])
 def compare_artists():
     try:
-        artist_1 = flask.request.args['name_1'].lower().replace(' ', '')
-        artist_2 = flask.request.args['name_2'].lower().replace(' ', '')
-        df_1 = pd.read_csv(f'sentiment_data/{artist_1}.csv')
-        df_2 = pd.read_csv(f'sentiment_data/{artist_2}.csv')
+        artist_1 = flask.request.args['name_1']
+        artist_2 = flask.request.args['name_2']
+        stripped_artist_1 = artist_1.lower().replace(' ', '')
+        stripped_artist_2 = artist_2.lower().replace(' ', '')
+        df_1 = pd.read_csv(f'sentiment_data/{stripped_artist_1}.csv')
+        df_2 = pd.read_csv(f'sentiment_data/{stripped_artist_2}.csv')
         polarity_1 = round(df_1.polarity.mean(), 2)
         polarity_2 = round(df_2.polarity.mean(), 2)
         return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), polarity_1=polarity_1, polarity_2=polarity_2)
