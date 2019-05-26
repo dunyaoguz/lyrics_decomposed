@@ -99,7 +99,7 @@ p {
 
 .intro {
 	text-align: center;
-	padding-top:3%;
+	padding-top:2%;
 	font-size: 20px;
 	transition:1000ms ease all;
 	padding-bottom: 2%;
@@ -112,7 +112,7 @@ button {
   position:relative;
   height:80px;
 	width:100%;
-  font-size:30px;
+  font-size:28px;
   padding:0 3em;
   cursor:pointer;
   transition:800ms ease all;
