@@ -4,7 +4,7 @@ from bokeh.models import HoverTool, Legend, ColumnDataSource, Panel, Tabs, Colum
 def sentiment_plot(df, y_max):
     a = int(df['release_year'].min())
     b = int(df['release_year'].max())
-    p = figure(plot_width=1000, plot_height=450, x_range=(a-1, b+1), y_range=(0, y_max), x_axis_label='Years',
+    p = figure(plot_width=1100, plot_height=400, x_range=(a-1, b+1), y_range=(0, y_max), x_axis_label='Years',
                y_axis_label='Percent of sentiments expressed', toolbar_location='above')
     # sentiment line plots
     r0 = p.line(df['release_year'], df['disgust'], color='red', line_dash="4 4", line_width=3)
@@ -53,7 +53,7 @@ def sentiment_plot(df, y_max):
         </div>
         <div>
             <span style="font-size: 15px;">Score: </span>
-            <span style="font-size: 17px; color: gray;">$y{(0.000)}</span>
+            <span style="font-size: 17px; color: gray;">$y{0.000}</span>
         </div>
     </div>
     """
@@ -62,6 +62,7 @@ def sentiment_plot(df, y_max):
     p.legend.click_policy="hide"
     p.legend.border_line_color = None
     p.background_fill_color = "#f2f2f2"
+    # p.border_fill_color = "#f8f9fa"
     p.grid.grid_line_color = "white"
     p.xaxis.major_tick_line_color = 'firebrick'
     p.xaxis.major_tick_line_width = 5
@@ -75,8 +76,7 @@ def view_albums(df):
     a = int(df['release_year'].min())
     b = int(df['release_year'].max())
     source = ColumnDataSource(df)
-    p = figure(plot_width=950, plot_height=180, x_range=(a-1, b+1), y_range=(0, 0.5), toolbar_location='above',
-    title='Albums discography', tools='pan,box_zoom,reset,save')
+    p = figure(plot_width=1050, plot_height=180, x_range=(a-1, b+1), y_range=(0, 0.5), toolbar_location='above', tools='pan,box_zoom,reset,save')
     p.scatter(df['release_year'], 0.25, marker='square_cross', fill_color='#D3D3D3', line_color='#696969', line_width=1.5, size=15)
     h = p.scatter('release_year', 0.25, marker='square', source=df, size=35, fill_color='white', hover_fill_color='#DCDCDC', fill_alpha=0,
     hover_alpha=0.2, line_color=None, hover_line_color='#DCDCDC')
@@ -96,6 +96,7 @@ def view_albums(df):
     p.axis.minor_tick_out = 8
     p.yaxis.major_tick_line_color = None
     p.yaxis.minor_tick_line_color = None
+    # p.border_fill_color = "#f8f9fa"
     p.ygrid.grid_line_color = None
     p.xgrid.grid_line_color = None
     p.outline_line_color = None
@@ -117,24 +118,25 @@ def cluster_plot(df):
     </div>
     """
     # 3 neighbors
-    p1 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
+    p1 = figure(toolbar_location="above", plot_width=1000, plot_height=400, tools='pan,box_zoom,reset,save',
                 x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
     p1.circle('Component1', 'Component2', size=15, source=df, color='color_3', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
     p1.background_fill_color = "#f2f2f2"
     p1.grid.grid_line_color = "white"
     p1.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     # 4 neighbors
-    p2 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
+    p2 = figure(toolbar_location="above", plot_width=1000, plot_height=400, tools='pan,box_zoom,reset,save',
                 x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
     p2.circle('Component1', 'Component2', size=15, source=df, color='color_4', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
     p2.background_fill_color = "#f2f2f2"
     p2.grid.grid_line_color = "white"
     p2.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     # 5 neighbors
-    p3 = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save',
+    p3 = figure(toolbar_location="above", plot_width=1000, plot_height=400, tools='pan,box_zoom,reset,save',
                 x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
     p3.circle('Component1', 'Component2', size=15, source=df, color='color_5', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
     p3.background_fill_color = "#f2f2f2"
+    # p.border_fill_color = "#f8f9fa"
     p3.grid.grid_line_color = "white"
     p3.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     tab1 = Panel(child=p1, title="3 clusters")
@@ -143,20 +145,32 @@ def cluster_plot(df):
     tabs = Tabs(tabs=[tab1, tab2, tab3])
     return tabs
 
-def polarity_plot(df):
+def polarity_plot(df, y_min, y_max):
+    TOOLTIPS = """
+    <div>
+        <div width="10px">
+            <span style="font-size: 15px;">Score: </span>
+            <span style="font-size: 17px; font-weight: bold;">$y{0.000}</span>
+        </div>
+    </div>
+    """
     a = int(df['release_year'].min())
     b = int(df['release_year'].max())
-    p = figure(plot_width=1050, plot_height=350, x_range=(2000, 2020), y_range=(0.1, 0.5), x_axis_label='Years', toolbar_location='above')
+    p = figure(plot_width=1000, plot_height=400, x_range=(a-1, b+1), y_range=(y_min, y_max), x_axis_label='Years', toolbar_location='above')
     source = ColumnDataSource(df)
     r0 = p.line(df['release_year'], df['polarity'],  color='black', line_width=4, legend="composite polarity score")
     r1 = p.scatter(df['release_year'], df['polarity'], fill_color='white', size=12, color='black', marker='circle', legend="composite polarity score")
-    labels = LabelSet(x='release_year', y='polarity', text='text', source=source, y_offset=13, text_font_size="12pt", text_color="#555555", text_align='center')
-    p.add_layout(labels)
+    # labels = LabelSet(x='release_year', y='polarity', text='text', source=source, y_offset=13, text_font_size="12pt", text_color="#555555", text_align='center')
+    # p.add_layout(labels)
+    p.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     p.xaxis.major_tick_line_color = 'firebrick'
+    # p.border_fill_color = "#f8f9fa"
     p.xaxis.major_tick_line_width = 5
     p.xaxis.minor_tick_line_color = 'orange'
     p.axis.major_tick_out = 10
     p.axis.minor_tick_out = 8
+    p.background_fill_color = "#f2f2f2"
+    p.grid.grid_line_color = "white"
     p.xgrid[0].ticker.desired_num_ticks = 10
     return p
 
@@ -170,9 +184,10 @@ def artists_cluster(df):
     </div>
     """
     source = ColumnDataSource(df)
-    p = figure(toolbar_location="above", plot_width=900, plot_height=450, tools='pan,box_zoom,reset,save', x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
+    p = figure(toolbar_location="above", plot_width=1000, plot_height=430, tools='pan,box_zoom,reset,save', x_axis_label='Principal Component 1', y_axis_label='Principal Component 2')
     p.circle('Component1', 'Component2', size=15, source=source, color='color_4', line_color="black", fill_alpha=0.8, hover_fill_color="black", hover_line_color=None)
     p.background_fill_color = "#f2f2f2"
     p.grid.grid_line_color = "white"
+    # p.border_fill_color = "#f8f9fa"
     p.add_tools(HoverTool(tooltips=TOOLTIPS, mode='mouse'))
     return p

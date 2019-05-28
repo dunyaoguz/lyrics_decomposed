@@ -36,6 +36,7 @@ def merge_all_artists():
         count += 1
         print(f'{count} artists merged')
     grand_df = grand_df.drop_duplicates().reset_index()
+    grand_df = grand_df.replace('Nico & Vinz', 'Nicovinz')
     grand_df = grand_df.drop(['index', 'level_0', 'Unnamed: 0', 'Unnamed: 0.1'], axis=1)
     grand_df.to_csv('sentiment_data/grand_df.csv')
 

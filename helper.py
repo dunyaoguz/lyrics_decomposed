@@ -94,3 +94,15 @@ def topics_per_year():
     df_2018 = pd.read_csv(f'topics_data/2018.csv', index_col=0)
     df_2019 = pd.read_csv(f'topics_data/2019.csv', index_col=0)
     return df_2000, df_2001, df_2002, df_2003, df_2004, df_2005, df_2006, df_2007, df_2008, df_2009, df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019
+
+def total_sentiments(df):
+    '''Compute total sentiments'''
+    df_normalized = df[['anger', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].sum()
+    sum = df_normalized['anger'] + df_normalized['anticipation'] + df_normalized['disgust'] + df_normalized['fear'] + df_normalized['joy'] + df_normalized['sadness'] + df_normalized['surprise'] + df_normalized['trust']
+    df_normalized['sum'] = sum
+    emotions_df = pd.DataFrame(df_normalized).T
+    cols = emotions_df.columns.tolist()
+    cols.remove('sum')
+    for col in cols:
+        emotions_df[col] = round(emotions_df[col] / emotions_df['sum'], 2)
+    return emotions_df

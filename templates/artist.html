@@ -18,35 +18,59 @@
   </head>
   <body>
       <div class="artist">
-        <p><img src="static/images/singer_1.png" width="120" height="120" class="d-inline-block align-top" alt=""></p>
+        <p><img src="static/images/dancing.png" width="120" height="120" class="d-inline-block align-top" alt=""></p>
         <p><font size="5">Currently analysing...</font></p>
-          <div class="heading" style="font-family:Husky Stash">
+          <div class="heading" style="font-family:Diskoteque">
           {{ artist }}
         </div>
       </div>
     <br>
-    <p><font size="5">Composite polarity score;</font></p>
-    <div class="polarity" style="font-family:College"><p>{{ polarity }}</p></div>
-    <p><font size="5">Sentiments expressed in songs over the years;</p></font>
+    <br><br>
+    <p><font size="5">Polarity of songs;</p></font>
+    <br>
+    <ol>
+      <li><span class="emo"><span style="font-size:70px">{{ polarity }}</span></span></li>
+    </ol>
+    <br>
+    <div class="chart">
+    {{ the_div_4|safe }}
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
+    {{ the_script_4|safe }}
+    </div>
+    <br>
+    <p><font size="5">Sentiments expressed in songs;</p></font>
+    <br>
+    <ol class="vertical_list">
+      <li><span class="emo">{{ anger }}%</span>Anger</li>&nbsp;&nbsp;
+      <li><span class="emo">{{ disgust }}%</span>Disgust</li>&nbsp;&nbsp;
+      <li><span class="emo">{{ fear }}%</span>Fear</li>
+      <li><span class="emo">{{ anticipation }}%</span>Anticipation</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li><span class="emo">{{ joy }}%</span>Joy</li>
+      <li><span class="emo">{{ sadness }}%</span>Sadness</li>&nbsp;&nbsp;&nbsp;
+      <li><span class="emo">{{ surprise }}%</span>Surprise</li>&nbsp;
+      <li><span class="emo">{{ trust }}%</span>Trust</li>
+    </ol>
+    <br>
     <div class="chart">
       {{ the_div_1|safe }}
-      <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
-      <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.5.min.js"></script>
       {{ the_script_1|safe }}
     </div>
+    <!-- <p><font size="5">Albums discography;</p></font>
     <div class="chart">
-      <br><br>
+      <br>
       {{ the_div_3|safe }}
       {{ the_script_3|safe }}
-    </div>
-    <br><br><br>
+    </div> -->
+    <br>
+    <br>
     <p><font size="5">Clusters of songs which are similar in sentiment;</p></font>
     <div class="chart">
       <br>
       {{ the_div_2|safe }}
       {{ the_script_2|safe }}
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <p><font size="5">Topics sung about;</font></p>
     <b><p><font size="4">1. </font></b><font size="3">{{topic_1}}</font></p>
     <b><p><font size="4">2. </font></b><font size="3">{{topic_2}}</font></p>
