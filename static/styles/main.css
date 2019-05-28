@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+
 .nav-header {
 	font-size: 200%;
 	color: #000;
@@ -254,8 +256,6 @@ input::placeholder {
 	transform: scale(1.05);
 }
 
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
-
 ol {
   list-style: none;
   display: flex;
@@ -287,8 +287,43 @@ ol li {
 	-webkit-text-stroke-width: 1px;
 	-webkit-text-stroke-color: #000;
 	transform: scale(1.1);
+	color:#5cbdea;
 }
 
 .vertical_list {
 	justify-content: space-between;
+}
+
+.words {
+	justify-content: center;
+	text-align: center;
+	font-size: 60px;
+	display: flex;
+  flex-wrap: wrap;
+}
+
+.word {
+	/* color:#5cbdea; */
+	color: 	#000;
+	/* border-radius: 12px;
+	border-color: black;
+	border-radius: 12px;
+	border-style: solid;
+	border-width: 1px; */
+	padding-top: 0.3%;
+	padding-bottom: 0.3%;
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #000;
+	font-weight: 500;
+}
+
+.space {
+		padding-right: 5%;
+}
+
+.word:hover {
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #000;
+	transform: scale(1.1);
+	color:#5cbdea;
 }

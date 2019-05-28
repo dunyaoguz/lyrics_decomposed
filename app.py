@@ -7,7 +7,7 @@ from bokeh.embed import components
 from lyrics_scraper import scrape_artist
 from sentiment_extractor import extract_sentiments
 from IPython.display import HTML
-from helper import read_data, cluster_data, albums_data, all_artists_data, topics_per_year, total_sentiments
+from helper import read_data, cluster_data, albums_data, all_artists_data, topics_per_year, total_sentiments, most_frequent_words
 from word_cloud_generator import generate_word_cloud
 from topic_modeller import model_topic
 
@@ -57,9 +57,12 @@ def compare_artists():
         positivity = (normalized_df_1['positive'] - normalized_df_2['positive'])/normalized_df_1['positive'] * 100
         topics_1 = pd.read_csv(f'topics_data/{stripped_artist_1}.csv', index_col=0)
         topics_2 = pd.read_csv(f'topics_data/{stripped_artist_2}.csv', index_col=0)
+        most_frequent_words_1 = most_frequent_words(df_1)
+        most_frequent_words_2 = most_frequent_words(df_2)
         return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), artist_1_proper=artist_1, artist_2_proper=artist_2, positivity=round(positivity, 2), anger=round(anger, 2),
         anticipation=round(anticipation, 2), disgust=round(disgust, 2), fear=round(fear, 2), joy=round(joy, 2), sadness=round(sadness, 2), surprise=round(surprise, 2), trust=round(trust, 2), topic_1=topics_1['words'][0],
-        topic_2=topics_1['words'][1], topic_3=topics_1['words'][3], topic_4=topics_2['words'][0], topic_5=topics_2['words'][1], topic_6=topics_2['words'][2])
+        topic_2=topics_1['words'][1], topic_3=topics_1['words'][3], topic_4=topics_2['words'][0], topic_5=topics_2['words'][1], topic_6=topics_2['words'][2], freq_word_1 = most_frequent_words_1[0], freq_word_2 = most_frequent_words_1[1],
+        freq_word_3 = most_frequent_words_1[2], freq_word_4 = most_frequent_words_2[0], freq_word_5 = most_frequent_words_2[1], freq_word_6 = most_frequent_words_2[2])
     except:
         return render_template('inventory_error.html')
 
@@ -89,7 +92,6 @@ def artist_data():
 @app.route('/artist', methods=['POST', 'GET'])
 def artist():
     try:
-        artist='lilwayne'
         artist = flask.request.args['name']
         stripped_artist = artist.replace(' ', '').replace('&', '').replace('é', 'e')
         df = pd.read_csv(f'sentiment_data/{stripped_artist}.csv', index_col=0)

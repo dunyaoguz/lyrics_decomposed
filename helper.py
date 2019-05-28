@@ -3,6 +3,8 @@ import numpy as np
 from sklearn.cluster import KMeans
 import random
 from sklearn.decomposition import PCA
+from nltk.corpus import stopwords
+from sklearn.feature_extraction.text import CountVectorizer
 
 def read_data(df):
     '''Prepare the data for the sentiment plot'''
@@ -96,7 +98,7 @@ def topics_per_year():
     return df_2000, df_2001, df_2002, df_2003, df_2004, df_2005, df_2006, df_2007, df_2008, df_2009, df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019
 
 def total_sentiments(df):
-    '''Compute total sentiments'''
+    '''Compute total sentiments expressed'''
     df_normalized = df[['anger', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust']].sum()
     sum = df_normalized['anger'] + df_normalized['anticipation'] + df_normalized['disgust'] + df_normalized['fear'] + df_normalized['joy'] + df_normalized['sadness'] + df_normalized['surprise'] + df_normalized['trust']
     df_normalized['sum'] = sum
@@ -106,3 +108,18 @@ def total_sentiments(df):
     for col in cols:
         emotions_df[col] = round(emotions_df[col] / emotions_df['sum'], 2)
     return emotions_df
+
+def most_frequent_words(df):
+    '''Find the most frequent words of an aritst'''
+    # artist = 'greenday'
+    # df = pd.read_csv(f'data/{artist}.csv')
+    s = stopwords.words('english')
+    s.extend(['don', 'like', 'ain', 'oh', 'll', 'ooh', 'na', 'just', 've', 'tha', 'yeah', 'gon', 'gonna', 'every',
+    'wanna', 'much', 'would', 'could', 'doin', 'ever', 'uh', 'uhh', 'huh', 'yeah', 'gotta', 'bout', 'got', 'way', 'la',
+    'hey', 'get', 'go'])
+    cv = CountVectorizer(min_df=0.2, stop_words=s, max_df=0.5)
+    counts = cv.fit_transform(df['lyrics'])
+    words_frequency = pd.DataFrame(counts.todense(), columns = cv.get_feature_names())
+    words_frequency = words_frequency.drop_duplicates()
+    words = words_frequency.sum().sort_values(ascending=False).index.tolist()[0:3]
+    return words
