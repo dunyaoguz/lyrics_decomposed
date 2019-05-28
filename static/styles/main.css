@@ -13,6 +13,10 @@
 	position: absolute;
 }
 
+body {
+	font-family: Airbnb Cereal App;
+}
+
 .data:link, .data:visited {
 	color: #000;
 	font-size: 20px;
@@ -30,27 +34,24 @@
 .data:hover {
 	 text-decoration: none;
 	 text-align: center;
-	 /* background-color:#5cbdea;
+	 background-color:#5cbdea;
 	 color: white;
 	 border-radius: 12px;
 	 border-color: #5cbdea;
 	 border-color: black;
 	 border-radius: 12px;
 	 border-style: solid;
-	 border-width: 1px;  */
-	 transform: scale(1.05);
+	 border-width: 1px;
+	 /* transform: scale(1.05);
  	-webkit-text-stroke-width: 1px;
- 	-webkit-text-stroke-color: #000;
+ 	-webkit-text-stroke-color: #000; */
 }
 
 /* artist page */
 
 .artist {
 	text-align: center;
-}
-
-.container {
-	display: inline-block;
+	transition: 1000ms ease all;
 }
 
 .more_info {
@@ -60,11 +61,9 @@
 .heading {
 	font-size:80px;
 	-webkit-text-stroke-width: 1px;
-	/* -webkit-text-stroke-color: white; */
 }
 
 .heading:hover{
-	/* color:#5cbdea; */
 	-webkit-text-stroke-width: 1px;
 	-webkit-text-stroke-color: #000;
 	transform: scale(1.05);
@@ -172,7 +171,7 @@ input::placeholder {
 
 .form {
   font-size: 70px;
-	font-family: monospace;
+	/* font-family: monospace; */
   height: 120px;
   display: inline-block;
 	outline: None;
@@ -204,13 +203,13 @@ input::placeholder {
 }
 
 .submit_button:hover{
-	/* background-color:#5cbdea;
+	background-color:#5cbdea;
 	color: white;
 	border-radius: 12px;
-	border-color: #5cbdea; */
-	transform: scale(1.05);
+	border-color: #5cbdea;
+	/* transform: scale(1.05);
 	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: #000;
+	-webkit-text-stroke-color: #000; */
 }
 
 /* all artists */
@@ -220,11 +219,11 @@ input::placeholder {
 }
 
 .data:focus {
-	/* background:#5cbdea;
-	color: #fff; */
-	transform: scale(1.1);
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: #000;
+	background:#5cbdea;
+	color: #fff;
+	/* transform: scale(1.1); */
+	/* -webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #000; */
 }
 
 /* artists comparison */

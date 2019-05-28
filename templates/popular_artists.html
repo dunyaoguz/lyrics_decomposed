@@ -19,11 +19,11 @@
   <body>
       <div class="artist">
         <p><img src="static/images/band_1.png" width="120" height="120" class="d-inline-block align-top" alt="">&nbsp;<img src="static/images/band_2.png" width="120" height="120" class="d-inline-block align-top" alt=""></p>
-        <p><font size="5">Currently analysing <b>{{ songs_no }}</b> songs by...</font></p>
+        <p><font size="5">Currently analysing... </font></p>
         <p><font size="5">Artists who made it to the Billboard 100 year-end charts since 2006</font></p>
       </div>
       <br>
-      <p><font size="5">Composite polarity score;</p></font>
+      <p><b><font size="5">Composite polarity score;</p></b></font>
       <div class="chart">
         {{ the_div_2|safe }}
         <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
@@ -31,19 +31,19 @@
         {{ the_script_2|safe }}
       </div>
       <br><br>
-      <p><font size="5">Sentiments expressed in songs;</p></font>
+      <p><font size="5"><b>Sentiments expressed in songs;</b></p></font>
       <div class="chart">
         {{ the_div_1|safe }}
         {{ the_script_1|safe }}
       </div>
       <br>
-      <p><font size="5">Clusters of artists similar in sentiments expressed; </p></font>
+      <p><font size="5"><b>Clusters of artists similar in sentiments expressed;</b></p></font>
       <div class="chart">
         {{ the_div_3|safe }}
         {{ the_script_3|safe }}
       </div>
       <br>
-      <p><font size="5">Predominant themes;</p></font>
+      <p><font size="5"><b>Predominant themes;</p></b></font>
       <div class="years">
         <p><font size="3">*click to collapse and de-collapse results</p></font>
         <script src="static/styles/javascript.js"></script>
@@ -234,7 +234,7 @@
       </div>
       </div>
       <br>
-      <p><img src="static/images/medal.png" width="50" height="50" class="align-top" alt=""/><font size="5">&nbsp;Awards;</p></font>
+      <p><img src="static/images/medal.png" width="50" height="50" class="align-top" alt=""/><font size="5">&nbsp;<b>Awards;</b></p></font>
       <b><p><font size="4">Most positive: </b>Jennifer Lopez, Justin Timberlake, Fifth Harmony</font></p>
       <b><p><font size="4">Most negative: </b>Lil Jon, Eminem, Disturbed</font></p>
       <b><p><font size="4">Saddest: </b>Disturbed, David Cook, Daughtry</font></p>

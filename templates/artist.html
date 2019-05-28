@@ -18,7 +18,7 @@
   </head>
   <body>
       <div class="artist">
-        <p><img src="static/images/dancing.png" width="120" height="120" class="d-inline-block align-top" alt=""></p>
+        <p><img src="static/images/dancing.png" width="120" height="120" alt=""></p>
         <p><font size="5">Currently analysing...</font></p>
           <div class="heading" style="font-family:Diskoteque">
           {{ artist }}
@@ -26,7 +26,7 @@
       </div>
     <br>
     <br><br>
-    <p><font size="5">Polarity of songs;</p></font>
+      <p><font size="5"><b>Polarity of songs;</b></p></font>
     <br>
     <ol>
       <li><span class="emo"><span style="font-size:70px">{{ polarity }}</span></span></li>
@@ -39,7 +39,7 @@
     {{ the_script_4|safe }}
     </div>
     <br>
-    <p><font size="5">Sentiments expressed in songs;</p></font>
+    <p><font size="5"><b>Sentiments expressed in songs;</b></p></font>
     <br>
     <ol class="vertical_list">
       <li><span class="emo">{{ anger }}%</span>Anger</li>&nbsp;&nbsp;
@@ -64,21 +64,21 @@
     </div> -->
     <br>
     <br>
-    <p><font size="5">Clusters of songs which are similar in sentiment;</p></font>
+    <p><font size="5"><b>Clusters of songs which are similar in sentiment;</b></p></font>
     <div class="chart">
       <br>
       {{ the_div_2|safe }}
       {{ the_script_2|safe }}
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <p><font size="5">Topics sung about;</font></p>
-    <b><p><font size="4">1. </font></b><font size="3">{{topic_1}}</font></p>
-    <b><p><font size="4">2. </font></b><font size="3">{{topic_2}}</font></p>
-    <b><p><font size="4">3. </font></b><font size="3">{{topic_3}}</font></p>
-    <b><p><font size="4">4. </font></b><font size="3">{{topic_4}}</font></p>
-    <b><p><font size="4">5. </font></b><font size="3">{{topic_5}}</font></p>
+    <p><font size="5"><b>Topics sung about;</b></font></p>
+    <b><p><font size="4">1. </b>{{topic_1}}</font></p>
+    <b><p><font size="4">2. </b>{{topic_2}}</font></p>
+    <b><p><font size="4">3. </b>{{topic_3}}</font></p>
+    <b><p><font size="4">4. </b>{{topic_4}}</font></p>
+    <b><p><font size="4">5. </b>{{topic_5}}</font></p>
     <br>
-    <p><font size="5">Most frequently used words;</font></p>
+    <p><font size="5"><b>Most frequently used words;</b></font></p>
     <div class = "word-cloud">
       <img src= {{ image }} alt="dt" width="700"/>
     </div>
