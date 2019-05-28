@@ -121,5 +121,5 @@ def most_frequent_words(df):
     counts = cv.fit_transform(df['lyrics'])
     words_frequency = pd.DataFrame(counts.todense(), columns = cv.get_feature_names())
     words_frequency = words_frequency.drop_duplicates()
-    words = words_frequency.sum().sort_values(ascending=False).index.tolist()[0:3]
+    words = words_frequency.sum().sort_values(ascending=False).index.tolist()[0:5]
     return words

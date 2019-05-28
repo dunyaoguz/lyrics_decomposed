@@ -62,7 +62,8 @@ def compare_artists():
         return render_template('compare_artists.html', artist_1=artist_1.upper(), artist_2=artist_2.upper(), artist_1_proper=artist_1, artist_2_proper=artist_2, positivity=round(positivity, 2), anger=round(anger, 2),
         anticipation=round(anticipation, 2), disgust=round(disgust, 2), fear=round(fear, 2), joy=round(joy, 2), sadness=round(sadness, 2), surprise=round(surprise, 2), trust=round(trust, 2), topic_1=topics_1['words'][0],
         topic_2=topics_1['words'][1], topic_3=topics_1['words'][3], topic_4=topics_2['words'][0], topic_5=topics_2['words'][1], topic_6=topics_2['words'][2], freq_word_1 = most_frequent_words_1[0], freq_word_2 = most_frequent_words_1[1],
-        freq_word_3 = most_frequent_words_1[2], freq_word_4 = most_frequent_words_2[0], freq_word_5 = most_frequent_words_2[1], freq_word_6 = most_frequent_words_2[2])
+        freq_word_3 = most_frequent_words_1[2], freq_word_4 = most_frequent_words_1[3], freq_word_5 = most_frequent_words_1[4], freq_word_6 = most_frequent_words_2[0], freq_word_7 = most_frequent_words_2[1], freq_word_8 = most_frequent_words_2[2],
+        freq_word_9 = most_frequent_words_2[3], freq_word_10 = most_frequent_words_2[4])
     except:
         return render_template('inventory_error.html')
 
