@@ -88,49 +88,49 @@ def artist_data():
 
 @app.route('/artist', methods=['POST', 'GET'])
 def artist():
-    # try:
-    artist='lilwayne'
-    artist = flask.request.args['name']
-    stripped_artist = artist.replace(' ', '').replace('&', '').replace('é', 'e')
-    df = pd.read_csv(f'sentiment_data/{stripped_artist}.csv', index_col=0)
-    df = df.drop_duplicates()
-    polarity = round(df.polarity.mean(), 2)
-    df['release_date'] = pd.to_datetime(df['release_date'], errors='coerce')
-    df['release_year'] = df['release_date'].dt.year
-    polarity_graph = df.groupby('release_year')[['polarity']].mean().reset_index()
-    polarity_graph['text'] = round(polarity_graph['polarity'],2)
-    chart_4 = polarity_plot(polarity_graph, -1.25, +2)
-    normalized_df = read_data(df)
-    chart_1 = sentiment_plot(normalized_df, 0.4)
-    ts = total_sentiments(df)
-    anger = round(float(ts.anger) * 100, 2)
-    anticipation = round(float(ts.anticipation) * 100, 2)
-    sadness = round(float(ts.sadness) * 100, 2)
-    joy = round(float(ts.joy) * 100, 2)
-    surprise = round(float(ts.surprise) * 100, 2)
-    trust = round(float(ts.trust) * 100, 2)
-    fear = round(float(ts.fear) * 100, 2)
-    disgust = round(float(ts.disgust) * 100, 2)
-    clusters = cluster_data(df)
-    clusters['title'] = df['title']
-    clusters['album'] = df['album']
-    clusters = clusters.replace('None', 'Unknown')
-    chart_2 = cluster_plot(clusters)
-    albums = albums_data(df)
-    chart_3 = view_albums(albums)
-    script_1, div_1 = components(chart_1)
-    script_2, div_2 = components(chart_2)
-    script_3, div_3 = components(chart_3)
-    script_4, div_4 = components(chart_4)
-    image = f'static/images/word_clouds/{stripped_artist}.png'
-    data_url = f'/artist_data?name={stripped_artist}'
-    topics = pd.read_csv(f'topics_data/{stripped_artist}.csv', index_col=0)
-    return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image,
-    the_script_3=script_3, the_div_3=div_3, data_url=data_url, topic_1=topics['words'][0], topic_2=topics['words'][1], topic_3=topics['words'][2], topic_4=topics['words'][3],
-    topic_5=topics['words'][4], the_script_4=script_4, the_div_4=div_4, anger=anger, anticipation=anticipation, fear=fear, joy=joy, sadness=sadness, trust=trust, surprise=surprise,
-    disgust=disgust)
-    # except:
-    #     return render_template('inventory_error.html')
+    try:
+        artist='lilwayne'
+        artist = flask.request.args['name']
+        stripped_artist = artist.replace(' ', '').replace('&', '').replace('é', 'e')
+        df = pd.read_csv(f'sentiment_data/{stripped_artist}.csv', index_col=0)
+        df = df.drop_duplicates()
+        polarity = round(df.polarity.mean(), 2)
+        df['release_date'] = pd.to_datetime(df['release_date'], errors='coerce')
+        df['release_year'] = df['release_date'].dt.year
+        polarity_graph = df.groupby('release_year')[['polarity']].mean().reset_index()
+        polarity_graph['text'] = round(polarity_graph['polarity'],2)
+        chart_4 = polarity_plot(polarity_graph, -1.25, +2)
+        normalized_df = read_data(df)
+        chart_1 = sentiment_plot(normalized_df, 0.4)
+        ts = total_sentiments(df)
+        anger = round(float(ts.anger) * 100, 2)
+        anticipation = round(float(ts.anticipation) * 100, 2)
+        sadness = round(float(ts.sadness) * 100, 2)
+        joy = round(float(ts.joy) * 100, 2)
+        surprise = round(float(ts.surprise) * 100, 2)
+        trust = round(float(ts.trust) * 100, 2)
+        fear = round(float(ts.fear) * 100, 2)
+        disgust = round(float(ts.disgust) * 100, 2)
+        clusters = cluster_data(df)
+        clusters['title'] = df['title']
+        clusters['album'] = df['album']
+        clusters = clusters.replace('None', 'Unknown')
+        chart_2 = cluster_plot(clusters)
+        albums = albums_data(df)
+        chart_3 = view_albums(albums)
+        script_1, div_1 = components(chart_1)
+        script_2, div_2 = components(chart_2)
+        script_3, div_3 = components(chart_3)
+        script_4, div_4 = components(chart_4)
+        image = f'static/images/word_clouds/{stripped_artist}.png'
+        data_url = f'/artist_data?name={stripped_artist}'
+        topics = pd.read_csv(f'topics_data/{stripped_artist}.csv', index_col=0)
+        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image,
+        the_script_3=script_3, the_div_3=div_3, data_url=data_url, topic_1=topics['words'][0], topic_2=topics['words'][1], topic_3=topics['words'][2], topic_4=topics['words'][3],
+        topic_5=topics['words'][4], the_script_4=script_4, the_div_4=div_4, anger=anger, anticipation=anticipation, fear=fear, joy=joy, sadness=sadness, trust=trust, surprise=surprise,
+        disgust=disgust)
+    except:
+        return render_template('inventory_error.html')
 
 @app.route('/popular_artists', methods=['POST', 'GET'])
 def popular_artists():

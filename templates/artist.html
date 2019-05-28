@@ -26,11 +26,13 @@
       </div>
     <br>
     <br><br>
-      <h3>Polarity of songs;</h3>
+      <h3>Polarity of songs...</h3>
     <br>
     <ol>
-      <li><span class="emo"><span style="font-size:60px">{{ polarity }}</span></span></li>
+      <!-- </span>Mean<span style="color:white">-</span>composite<span style="color:white">-</span>polarity -->
+      <li><span class="emo"><span style="font-size:45px">{{ polarity }}</span></li>
     </ol>
+    <br>
     <br>
     <div class="chart">
     {{ the_div_4|safe }}
@@ -39,7 +41,7 @@
     {{ the_script_4|safe }}
     </div>
     <br>
-    <h3>Sentiments expressed in songs;</h3>
+    <h3>Sentiments expressed in songs...</h3>
     <br>
     <ol class="vertical_list">
       <li><span class="emo">{{ anger }}%</span>Anger</li>&nbsp;&nbsp;
@@ -51,6 +53,7 @@
       <li><span class="emo">{{ surprise }}%</span>Surprise</li>&nbsp;
       <li><span class="emo">{{ trust }}%</span>Trust</li>
     </ol>
+    <br>
     <br>
     <div class="chart">
       {{ the_div_1|safe }}
@@ -64,21 +67,21 @@
     </div> -->
     <br>
     <br>
-    <h3>Clusters of songs which are similar in sentiment;</h3>
+    <h3>Clusters of songs which are similar in sentiment...</h3>
     <div class="chart">
       <br>
       {{ the_div_2|safe }}
       {{ the_script_2|safe }}
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <h3>Topics sung about;</h3>
+    <h3>Topics sung about...</h3>
     <b><p><font size="4">1. </b>{{topic_1}}</font></p>
     <b><p><font size="4">2. </b>{{topic_2}}</font></p>
     <b><p><font size="4">3. </b>{{topic_3}}</font></p>
     <b><p><font size="4">4. </b>{{topic_4}}</font></p>
     <b><p><font size="4">5. </b>{{topic_5}}</font></p>
     <br>
-    <h3>Most frequently used words;</h3>
+    <h3>Most frequently used words...</h3>
     <div class = "word-cloud">
       <img src= {{ image }} alt="dt" width="700"/>
     </div>

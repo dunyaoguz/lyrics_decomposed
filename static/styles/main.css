@@ -21,6 +21,10 @@ h3 {
 	padding-left: 2%;
 }
 
+h5 {
+	padding-left: 2%;
+}
+
 .data:link, .data:visited {
 	color: #000;
 	font-size: 20px;
@@ -110,7 +114,7 @@ p {
 	padding-top:5%;
 	font-size: 20px;
 	transition:1000ms ease all;
-	padding-bottom: 4%;
+	padding-bottom: 3%;
 }
 
 button {
@@ -203,7 +207,7 @@ input::placeholder {
 	position: relative;
 	border-radius: 12px;
 	background:#f8f9fa;
-	left: 250px;
+	left: 390px;
 }
 
 .submit_button:hover{
