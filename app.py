@@ -125,7 +125,7 @@ def artist():
         image = f'static/images/word_clouds/{stripped_artist}.png'
         data_url = f'/artist_data?name={stripped_artist}'
         topics = pd.read_csv(f'topics_data/{stripped_artist}.csv', index_col=0)
-        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.upper(), image=image,
+        return render_template('artist.html', the_script_1=script_1, the_div_1=div_1, the_script_2=script_2, the_div_2=div_2, polarity=polarity, artist=artist.title(), image=image,
         the_script_3=script_3, the_div_3=div_3, data_url=data_url, topic_1=topics['words'][0], topic_2=topics['words'][1], topic_3=topics['words'][2], topic_4=topics['words'][3],
         topic_5=topics['words'][4], the_script_4=script_4, the_div_4=div_4, anger=anger, anticipation=anticipation, fear=fear, joy=joy, sadness=sadness, trust=trust, surprise=surprise,
         disgust=disgust)
