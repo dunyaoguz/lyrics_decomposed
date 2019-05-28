@@ -17,6 +17,10 @@ body {
 	font-family: Airbnb Cereal App;
 }
 
+h3 {
+	padding-left: 2%;
+}
+
 .data:link, .data:visited {
 	color: #000;
 	font-size: 20px;

@@ -26,7 +26,7 @@
       </div>
     <br>
     <br><br>
-      <p><font size="5"><b>Polarity of songs;</b></p></font>
+      <h3>Polarity of songs;</h3>
     <br>
     <ol>
       <li><span class="emo"><span style="font-size:70px">{{ polarity }}</span></span></li>
@@ -39,7 +39,7 @@
     {{ the_script_4|safe }}
     </div>
     <br>
-    <p><font size="5"><b>Sentiments expressed in songs;</b></p></font>
+    <h3>Sentiments expressed in songs;</h3>
     <br>
     <ol class="vertical_list">
       <li><span class="emo">{{ anger }}%</span>Anger</li>&nbsp;&nbsp;
@@ -64,21 +64,21 @@
     </div> -->
     <br>
     <br>
-    <p><font size="5"><b>Clusters of songs which are similar in sentiment;</b></p></font>
+    <h3>Clusters of songs which are similar in sentiment;</h3>
     <div class="chart">
       <br>
       {{ the_div_2|safe }}
       {{ the_script_2|safe }}
     </div>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <p><font size="5"><b>Topics sung about;</b></font></p>
+    <h3>Topics sung about;</h3>
     <b><p><font size="4">1. </b>{{topic_1}}</font></p>
     <b><p><font size="4">2. </b>{{topic_2}}</font></p>
     <b><p><font size="4">3. </b>{{topic_3}}</font></p>
     <b><p><font size="4">4. </b>{{topic_4}}</font></p>
     <b><p><font size="4">5. </b>{{topic_5}}</font></p>
     <br>
-    <p><font size="5"><b>Most frequently used words;</b></font></p>
+    <h3>Most frequently used words;</h3>
     <div class = "word-cloud">
       <img src= {{ image }} alt="dt" width="700"/>
     </div>
