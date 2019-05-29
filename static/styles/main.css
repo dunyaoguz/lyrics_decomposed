@@ -334,7 +334,6 @@ li.shrinker {
 }
 
 .word {
-	/* color:#5cbdea; */
 	/* border-radius: 12px;
 	border-color: black;
 	border-radius: 12px;
@@ -342,8 +341,8 @@ li.shrinker {
 	border-width: 1px; */
 	padding-top: 0.3%;
 	padding-bottom: 0.3%;
-	-webkit-text-stroke-width: 0.5px;
-	-webkit-text-stroke-color: #000;
+	/* -webkit-text-stroke-width: 0.1px; */
+	/* -webkit-text-stroke-color: #000; */
 	font-family: Airbnb Cereal App Bold;
 }
 
@@ -380,7 +379,6 @@ li.li_about_page {
 	padding-right: 3%;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
