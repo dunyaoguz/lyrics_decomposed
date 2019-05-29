@@ -256,7 +256,7 @@ input::placeholder {
 	transform: scale(1.05);
 }
 
-ol {
+ol.vertical_list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -267,7 +267,7 @@ ol {
 	margin-right: 2%;
 }
 
-ol li {
+li.shrinker {
 	display: flex;
   width: 10%;
   font-size: 0.8rem;
