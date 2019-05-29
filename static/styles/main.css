@@ -1,4 +1,23 @@
-@import url('https://fonts.googleapis.com/css?family=Abril+Fatface');
+@font-face {
+font-family: "Diskoteque";
+src: url("fonts/Diskoteque.ttf");
+}
+
+@font-face {
+font-family: "Airbnb Cereal App";
+src: url("fonts/cereal-airbnb-font-master/AirbnbCereal-Book.ttf");
+}
+
+
+@font-face {
+font-family: "Airbnb Cereal App Bold";
+src: url("fonts/cereal-airbnb-font-master/AirbnbCereal-Bold.ttf");
+}
+
+@font-face {
+font-family: "Airbnb Cereal App Medium";
+src: url("fonts/cereal-airbnb-font-master/AirbnbCereal-Medium.ttf");
+}
 
 .nav-header {
 	font-size: 200%;
@@ -21,14 +40,22 @@ body {
 
 h3 {
 	padding-left: 2%;
+	font-family: Airbnb Cereal App Medium;
 }
 
 h2 {
 	padding-left: 2%;
+	font-family: Airbnb Cereal App Medium;
+}
+
+h1 {
+	padding-left: 2%;
+	font-family: Airbnb Cereal App Medium;
 }
 
 h5 {
 	padding-left: 2%;
+	font-family: Airbnb Cereal App Medium;
 }
 
 .data:link, .data:visited {
@@ -213,7 +240,7 @@ input::placeholder {
 	position: relative;
 	border-radius: 12px;
 	background:#f8f9fa;
-	left: 390px;
+	/* left: 390px; */
 }
 
 .submit_button:hover{
@@ -316,9 +343,10 @@ li.shrinker {
 	border-width: 1px; */
 	padding-top: 0.3%;
 	padding-bottom: 0.3%;
-	-webkit-text-stroke-width: 1px;
-	-webkit-text-stroke-color: #000;
-	font-weight: 500;
+	-webkit-text-stroke-width: 0.2px;
+	-webkit-text-stroke-color: #fff;
+	font-family: Airbnb Cereal App Bold;
+	font-weight: 600;
 }
 
 .space {
@@ -328,7 +356,7 @@ li.shrinker {
 .word:hover {
 	-webkit-text-stroke-width: 1px;
 	-webkit-text-stroke-color: #000;
-	transform: scale(1.1);
+	transform: scale(1.2);
 	color:#5cbdea;
 }
 
