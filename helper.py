@@ -111,8 +111,7 @@ def total_sentiments(df):
 
 def most_frequent_words(df):
     '''Find the most frequent words of an aritst'''
-    # artist = 'greenday'
-    # df = pd.read_csv(f'data/{artist}.csv')
+    df = df.dropna()
     s = stopwords.words('english')
     s.extend(['don', 'like', 'ain', 'oh', 'll', 'ooh', 'na', 'just', 've', 'tha', 'yeah', 'gon', 'gonna', 'every',
     'wanna', 'much', 'would', 'could', 'doin', 'ever', 'uh', 'uhh', 'huh', 'yeah', 'gotta', 'bout', 'got', 'way', 'la',

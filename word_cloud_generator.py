@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import random
 
-def generate_word_cloud(df, year):
+def generate_word_cloud(artist):
     '''Creates a word cloud for the given artist and saves the file as png'''
     artist = artist.replace(' ', '')
     df = pd.read_csv(f'data/{artist}.csv')

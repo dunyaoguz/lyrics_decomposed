@@ -28,6 +28,7 @@ def prepare_corpus(df):
 
 def model_topic(artist):
     '''Extract predominant themes from a given artists' lyrics'''
+    artist = artist.replace(' ', '')
     df = pd.read_csv(f'data/{artist}.csv')
     corpus = prepare_corpus(df)
     dictionary = Dictionary(corpus)

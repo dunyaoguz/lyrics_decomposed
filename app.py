@@ -164,7 +164,9 @@ def popular_artists():
 
 @app.route('/popular_artists_list', methods=['POST', 'GET'])
 def popular_artists_list():
-    df = pd.read_csv('sentiment_data/grand_df.csv')['primary_artist'].unique()
+    df = pd.read_csv('sentiment_data/grand_df.csv')
+    df = df.dropna()
+    df = df['primary_artist'].unique()
     df = HTML(pd.DataFrame(df, columns=['Name']).to_html(classes="table table-stripped"))
     return render_template('popular_artists_list.html', data = df)
 
