@@ -8,6 +8,11 @@ Lyrics Decomposed is web application that allows users to analyze the topics, po
 
 <img src="static/images/homepage.png" alt="dt" width="900"/>
 
+To use Lyrics Decomposed:
+- Git clone this repository
+- Cd to lyrics_decomposed on your local machine
+- Run `python app.py` from terminal
+
 # Process
 
 This was an end-to-end data project, involving every step of the data science process from data acquisition to deployment in the form of an application a user can interact with. Here is an overview of the main steps:
@@ -18,15 +23,18 @@ This was an end-to-end data project, involving every step of the data science pr
 4. Create visualisations that'll enable users to explore the information interactively
 5. Package everything into a web application with which users can analyse any artist of their choice
 
-# Web Scraping
+## Web Scraping
 
 <img src="static/images/webscraping.png" alt="dt" width="900"/>
 
-# Natural Language Processing
+## Natural Language Processing
 
-<img src="static/images/nlp_process.png" alt="dt" width="900"/>
+<img src="static/images/nlp_process.png" alt="dt" width="700"/>
 
 
-# Unsupervised Learning
+## Unsupervised Learning
 
-<img src="static/images/unsupervised.png" alt="dt" width="900"/>
+<img src="static/images/unsupervised.png" alt="dt" width="700"/>
+
+## Tools and Packages
+

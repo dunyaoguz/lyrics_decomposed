@@ -146,7 +146,6 @@ def popular_artists():
     chart_2 = polarity_plot(polarity, 0.1, 0.45)
     script_2, div_2 = components(chart_2)
     df_2000, df_2001, df_2002, df_2003, df_2004, df_2005, df_2006, df_2007, df_2008, df_2009, df_2010, df_2011, df_2012, df_2013, df_2014, df_2015, df_2016, df_2017, df_2018, df_2019 = topics_per_year()
-    df_2 = pd.read_csv('sentiment_data/grand_df.csv', index_col=0)
     artists = df.groupby('primary_artist')[['anger', 'anticipation', 'disgust', 'fear', 'joy', 'positive', 'negative', 'sadness', 'surprise', 'trust']].mean()
     artists = artists.reset_index()
     clusters = cluster_data(artists)
