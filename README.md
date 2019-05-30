@@ -6,10 +6,10 @@ Lyrics Decomposed is web application that allows users to analyze the topics, po
 - Compare two artists' lyrics
 - Analyse the lyrics of all Billboard year-end hot 100 artists since 2006
 
-<img src="homepage.png" alt="dt" width="900"/>
+<img src="static/images/homepage.png" alt="dt" width="900"/>
 
 # Process
----
+
 This was an end-to-end data project, involving every step of the data science process from data acquisition to deployment in the form of an application a user can interact with. Here is an overview of the main steps:
 
 1. Get data by scraping lyrics and song-related information from Genius.com
@@ -24,3 +24,6 @@ This was an end-to-end data project, involving every step of the data science pr
 
 # Natural Language Processing
 
+<img src="static/images/nlprocess.png" alt="dt" width="900"/>
+
+# Unsupervised Learning
