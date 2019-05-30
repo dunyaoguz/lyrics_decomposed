@@ -29,7 +29,7 @@ This was an end-to-end data project, involving every step of the data science pr
 
 ## Natural Language Processing
 
-<video src="demo_1.mp4" width="420" height="400" controls preload></video>
+<video src="demo-1.mp4" width="420" height="400" controls preload></video>
 
 <img src="static/images/nlp_process.png" alt="dt" width="700"/>
 
