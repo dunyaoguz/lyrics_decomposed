@@ -21,6 +21,8 @@ def sentiment_plot(df, y_max):
     r11 = p.circle(df['release_year'], df['anticipation'], fill_color='hotpink', size=8, color='hotpink')
     r12 = p.line(df['release_year'], df['anger'], line_dash="4 4", color='deepskyblue', line_width=3)
     r13 = p.circle(df['release_year'], df['anger'], size=8, color='deepskyblue', fill_color='deepskyblue')
+    r14 = p.line(df['release_year'], df['trust'], line_dash="4 4", color='gold', line_width=3)
+    r15 = p.circle(df['release_year'], df['trust'], size=8, color='gold', fill_color='gold')
     # hover circles
     p.circle(df['release_year'], df['anger'], size=20, fill_color='white', hover_fill_color='deepskyblue',
                      fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='deepskyblue')
@@ -36,6 +38,8 @@ def sentiment_plot(df, y_max):
                     fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='orange')
     p.circle(df['release_year'], df['joy'], size=20, fill_color='white', hover_fill_color='yellowgreen',
                    fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='yellowgreen')
+    p.circle(df['release_year'], df['trust'], size=20, fill_color='white', hover_fill_color='gold',
+                   fill_alpha=0.02, hover_alpha=0.2, line_color=None, hover_line_color='gold')
     legend = Legend(items=[
     ("disgust", [r0, r1]),
     ("sadness", [r2, r3]),
@@ -43,7 +47,8 @@ def sentiment_plot(df, y_max):
     ("surprise", [r6, r7]),
     ("fear", [r8, r9]),
     ("anticipation", [r10, r11]),
-    ("anger", [r12, r13])
+    ("anger", [r12, r13]),
+    ("trust", [r14, r15])
     ], location="center")
     TOOLTIPS = """
     <div>

@@ -8,7 +8,7 @@ Lyrics Decomposed is web application that allows users to analyze the topics, po
 
 <img src="static/images/homepage.png" alt="dt" width="900"/>
 
-To try the Lyrics Decomposed app:
+### To use the Lyrics Decomposed app:
 - Git clone this repository
 - Cd to lyrics_decomposed on your local machine
 - Run `python app.py` from terminal
@@ -29,23 +29,29 @@ This was an end-to-end data project, involving every step of the data science pr
 
 ## Natural Language Processing
 
-<video src="demo-1.mp4" width="420" height="400" controls preload></video>
+* **Polarity analysis:** Polarity analysis informs us on the level of positivity or negativity of a given document. In this project, I used the VADER lexicon to extract the polarity of song lyrics. The VADER lexicon is specifically attuned to sentiments expressed on social media and is valence based, meaning it doesn't just take into account whether a word carries a positive or negative meaning, but also how intensely it carries that meaning. For example, "hate" and "dislike" are both negative words, but "hate" is *more* negative than dislike. 
 
-<img src="static/images/nlp_process.png" alt="dt" width="700"/>
-
+* **Sentiment analysis**: 
 
 ## Unsupervised Learning
 
 <img src="static/images/unsupervised.png" alt="dt" width="700"/>
 
-## Packages used
+### Packages used
 
 - pandas
 - numpy
 - sklearn
 - requests
+- dotenv
 - BeautifulSoup
+- nltk
+- regex
+- gensim
+- wordcloud
+- vaderSentiment
 - flask
+- jinja2
 - bokeh
 - HTML
 - CSS
