@@ -53,10 +53,11 @@ The resulting web application comes with the following features:
 * Scrape any artist of choice in real time, and analyse within minutes 
 
 ## Next Steps
+
 * Incorporate information on milestones in artists' careers so it's possible to directly see if certain events caused a change in the content of their songs
 * Publish the app
 
-### Packages used
+## Tech Stack
 
 - pandas
 - numpy
