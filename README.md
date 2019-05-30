@@ -6,7 +6,7 @@ Lyrics Decomposed is web application that allows users to analyze the topics, po
 - Compare two artists' lyrics
 - Analyse the lyrics of all Billboard year-end hot 100 artists since 2006
 
-<img src="static/images/homepage.png" alt="dt" ="900"/>
+<img src="homepage.png" alt="dt" width="900"/>
 
 # Process
 ---
@@ -20,7 +20,7 @@ This was an end-to-end data project, involving every step of the data science pr
 
 # Web Scraping
 
-<img src="static/images/webscraping.png" alt="dt" ="900"/>
+<img src="static/images/webscraping.png" alt="dt" width="900"/>
 
 # Natural Language Processing
 
