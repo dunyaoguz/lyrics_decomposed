@@ -8,7 +8,7 @@ Lyrics Decomposed is web application that allows users to analyze the topics, po
 
 <img src="static/images/homepage.png" alt="dt" width="900"/>
 
-To use Lyrics Decomposed:
+To try the Lyrics Decomposed app:
 - Git clone this repository
 - Cd to lyrics_decomposed on your local machine
 - Run `python app.py` from terminal
@@ -29,6 +29,8 @@ This was an end-to-end data project, involving every step of the data science pr
 
 ## Natural Language Processing
 
+<video src="demo_1.mp4" width="420" height="400" controls preload></video>
+
 <img src="static/images/nlp_process.png" alt="dt" width="700"/>
 
 
@@ -36,5 +38,16 @@ This was an end-to-end data project, involving every step of the data science pr
 
 <img src="static/images/unsupervised.png" alt="dt" width="700"/>
 
-## Tools and Packages
+## Packages used
+
+- pandas
+- numpy
+- sklearn
+- requests
+- BeautifulSoup
+- flask
+- bokeh
+- HTML
+- CSS
+- JavaScript
 
