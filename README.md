@@ -27,3 +27,5 @@ This was an end-to-end data project, involving every step of the data science pr
 <img src="static/images/nlprocess.png" alt="dt" width="900"/>
 
 # Unsupervised Learning
+
+<img src="static/images/nlp_process.png" alt="dt" width="900"/>
